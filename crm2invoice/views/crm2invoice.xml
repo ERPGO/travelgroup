@@ -31,7 +31,7 @@
       </record-->
 
         <!-- crm field on account.invoice_form -->
-        <record id="account.invoice_crm_lead"
+        <record id="x_account.invoice_crm_lead"
                 model="ir.ui.view">
             <field name="field_parent" eval="False"/>
             <field name="inherit_id" ref="account.invoice_form"/>
