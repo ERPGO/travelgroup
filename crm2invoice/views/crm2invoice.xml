@@ -43,12 +43,12 @@
             <field name="active" eval="True"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='partner_id']" position="before">
-                    <field name="x_crm_lead" attrs="{}" readonly="1"/>
+                    <field name="crm_lead" attrs="{}" readonly="1"/>
                 </xpath>
             </field>
         </record>
 
-        <record id="crm.smart_invoices_button"
+        <record id="crm_smart_invoices_button"
                 model="ir.ui.view">
             <field name="inherit_id" ref="crm.crm_case_form_view_oppor"/>
             <field name="mode">extension</field>
@@ -75,7 +75,7 @@
             <field name="context">{'search_default_crm_lead': active_id,'default_crm_lead': active_id}</field>
         </record>
 
-        <record id="crm.new_invoice_button"
+        <record id="crm_new_invoice_button"
                 model="ir.ui.view">
             <field name="inherit_id" ref="crm.crm_case_form_view_oppor"/>
             <field name="mode">extension</field>
