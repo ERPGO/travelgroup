@@ -1,0 +1,44 @@
+<odoo>
+    <data>
+        <record id="crm2invoice.action_no_invoice_raise_warning"
+                model="ir.actions.server">
+            <field name="binding_model_id" eval="False"/>
+            <field name="binding_type">action</field>
+            <field name="child_ids" eval="[(6, 0, [])]"/>
+            <field name="code"><![CDATA[for rec in records:
+    invoice_rec = env['account.invoice'].search([('crm_lead','=',rec.id)])
+#    raise Warning(invoice_rec)
+    if not invoice_rec :
+      raise Warning("No paid invoice")
+    for inv in invoice_rec:
+      if not inv.state == "paid":
+        raise Warning("At least one unpaid invoice")
+
+]]></field>
+            <field name="crud_model_id" eval="False"/>
+            <field name="help" eval="False"/>
+            <field name="link_field_id" eval="False"/>
+            <field name="model_id" ref="crm.model_crm_lead"/>
+            <field name="name">No second stage if no paid invoice</field>
+            <field name="sequence">5</field>
+            <field name="state">code</field>
+        </record>
+
+
+        <record id="crm2invoice.automation_no_invoice_raise_warning"
+                model="base.automation">
+            <field name="action_server_id"
+                   ref="crm2invoice.action_no_invoice_raise_warning"/>
+            <field name="active" eval="True"/>
+            <field name="filter_domain">[["stage_id","!=",1]]</field>
+            <field name="filter_pre_domain">[["stage_id","=",1]]</field>
+            <field name="last_run" eval="False"/>
+            <field name="on_change_fields" eval="False"/>
+            <field name="trg_date_id" eval="False"/>
+            <field name="trg_date_range" eval="False"/>
+            <field name="trg_date_range_type" eval="False"/>
+            <field name="trigger">on_create_or_write</field>
+        </record>
+
+    </data>
+</odoo>
