@@ -31,7 +31,7 @@
       </record-->
 
         <!-- crm field on account.invoice_form -->
-        <record id="x_account.invoice_crm_lead"
+        <record id="account.invoice_crm_lead"
                 model="ir.ui.view">
             <field name="field_parent" eval="False"/>
             <field name="inherit_id" ref="account.invoice_form"/>
@@ -43,7 +43,7 @@
             <field name="active" eval="True"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='partner_id']" position="before">
-                    <field name="crm_lead" attrs="{}" readonly="1"/>
+                    <field name="x_crm_lead" attrs="{}" readonly="1"/>
                 </xpath>
             </field>
         </record>
