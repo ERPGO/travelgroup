@@ -28,6 +28,7 @@
         #'views/crm2invoice.xml',
         #'views/automation.xml',
         #'views/templates.xml',
+        'views/view1.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

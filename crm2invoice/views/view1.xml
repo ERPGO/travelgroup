@@ -1,0 +1,21 @@
+<odoo>
+    <data>
+        <!-- crm field on account.invoice_form -->
+        <record id="account.invoice_crm_lead"
+                model="ir.ui.view">
+            <field name="field_parent" eval="False"/>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="mode">extension</field>
+            <field name="model">account.invoice</field>
+            <field name="name">account.crm_lead_form</field>
+            <field name="priority">99</field>
+            <field name="type">form</field>
+            <field name="active" eval="True"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="before">
+                    <field name="x_crm_lead" attrs="{}" readonly="1"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
