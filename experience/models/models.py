@@ -30,8 +30,6 @@ class Evaluation(models.Model):
     operational_excellence = fields.Selection([["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"]])
     avarage_rate = fields.Float(string="Avarage rate", readonly=True, compute='_get_avarage')
 
-    @api.multi
+    @api.onchange('organization_skill', 'operational_excellence')
     def _get_avarage(self):
-        for record in self:
-            record.average_rate = int(record.organization_skill) + int(record.operational_excellence) / 2
-            print(record.avarage_rate)
+            self.average_rate = int(self.organization_skill) + int(self.operational_excellence) / 2
