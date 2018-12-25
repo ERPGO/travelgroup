@@ -26,10 +26,13 @@ class Experience(models.Model):
 class Evaluation(models.Model):
     _inherit = 'hr.payslip'
 
-    organization_skill = fields.Selection([["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"]])
-    operational_excellence = fields.Selection([["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"]])
-    avarage_rate = fields.Float(string="Avarage rate", readonly=True, compute='_get_avarage')
+#    organization_skill = fields.Selection([["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"]])
+#    operational_excellence = fields.Selection([["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"]])
+    organization_skill = fields.Integer(string="Organization Skill")
+    operational_excellence = fields.Integer(string="Excellence")
+    avarage_rate = fields.Float(string="Avarage rate", readonly=True, stored=False)
 
     @api.onchange('organization_skill', 'operational_excellence')
     def _get_avarage(self):
-            self.average_rate = int(self.organization_skill) + int(self.operational_excellence) / 2
+        for record in self:
+            record.average_rate = int(record.organization_skill) + int(record.operational_excellence) / 2
