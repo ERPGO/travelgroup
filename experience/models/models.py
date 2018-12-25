@@ -21,3 +21,14 @@ class Experience(models.Model):
             d1 = datetime.strptime(str(self.startdate), "%Y-%m-%d").date()
             d2 = date.today()
             self.experience = relativedelta(d2, d1).years
+
+class Evaluation(models.Model):
+    _inherit = 'hr.payslip'
+
+    organization_skill = fields.Selection([["1","1"],["2","2"],["3","3"],["4","4"],["5","5"]])
+    operational_excellence = fields.Selection([["1","1"],["2","2"],["3","3"],["4","4"],["5","5"]])
+    avarage_rate = fields.Float(string="Avarage rate", readonly=True, compute='_get_avarage')
+
+    @api.multi
+    def _get_avarage( self ):
+        record['average_rate'] = (record['organizational_skill'] + record['operational_excellence']) / 2
