@@ -25,7 +25,7 @@ class Experience(models.Model):
 class Evaluation(models.Model):
     _inherit = 'hr.payslip'
 
-    organization_skill = fields.Selection([["1","1"],["2","2"],["3","3"],["4","4"],["5","5"]])
+    organizational_skill = fields.Selection([["1","1"],["2","2"],["3","3"],["4","4"],["5","5"]])
     operational_excellence = fields.Selection([["1","1"],["2","2"],["3","3"],["4","4"],["5","5"]])
     avarage_rate = fields.Float(string="Avarage rate", readonly=True, compute='_get_avarage')
 
