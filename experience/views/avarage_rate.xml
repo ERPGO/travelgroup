@@ -15,7 +15,7 @@
                     <page name="studio_page_H5RUR" string="Evaluation">
                         <group name="studio_group_H5RUR">
                             <group name="studio_group_H5RUR_left">
-                                <field name="organization_skill" string="Organizational skills"/>
+                                <field name="organization_skill" string="Organization skills"/>
                                 <field name="operational_excellence" string="Operational excellence"/>
                                 <field name="avarage_rate" string="Average rate"/>
                             </group>
