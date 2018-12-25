@@ -22,15 +22,15 @@ class Experience(models.Model):
             d2 = date.today()
             self.experience = relativedelta(d2, d1).years
 
+
 class Evaluation(models.Model):
     _inherit = 'hr.payslip'
 
-    organization_skill = fields.Selection([["1","1"],["2","2"],["3","3"],["4","4"],["5","5"]])
-    operational_excellence = fields.Selection([["1","1"],["2","2"],["3","3"],["4","4"],["5","5"]])
+    organization_skill = fields.Selection([["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"]])
+    operational_excellence = fields.Selection([["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"]])
     avarage_rate = fields.Float(string="Avarage rate", readonly=True, compute='_get_avarage')
 
     @api.multi
-    def _get_avarage( self ):
-
+    def _get_avarage(self):
         for record in self:
-            record['average_rate'] = ((record['organization_skill'] + record['operational_excellence']) / 2 )
+            record.average_rate = (record.organization_skill + record.operational_excellence) / 2
