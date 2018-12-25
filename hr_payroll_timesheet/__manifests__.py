@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "crm2invoice",
+    'name': "payroll_timesheet",
 
     'summary': """
-        Short (1 phrase/line) summary of the module's purpose, used as
-        subtitle on modules listing or apps.openerp.com""",
+        Adds Employee's start date and shows its experience in years in experience""",
 
     'description': """
-        Long description of module's purpose
+        Adds Employee's start date and shows its experience in years in experience
     """,
 
     'author': "ERGPO",
@@ -20,20 +19,20 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','crm','account'],
+    'depends': ['base', 'hr'],
 
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
-        'views/crm2invoice.xml',
+        # 'views/crm2invoice.xml',
         #'views/automation.xml',
         #'views/templates.xml',
-        #'views/experience.xml',
+        'views/experience.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
         'demo/demo.xml',
     ],
     'installable': True,
-    'Application': True,
+    'Application': False,
 }
