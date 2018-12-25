@@ -31,5 +31,6 @@ class Evaluation(models.Model):
 
     @api.multi
     def _get_avarage( self ):
+
         for record in self:
-            record['average_rate'] = Average(record['organization_skill'] + record['operational_excellence'])
+            record['average_rate'] = int(record.organization_skill) + int(record.operational_excellence) / 2
