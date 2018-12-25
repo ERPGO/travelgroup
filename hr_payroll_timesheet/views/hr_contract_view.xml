@@ -5,10 +5,10 @@
             <field name="name">HR Contract Inherit 1</field>
             <field name="model">hr.contract</field>
             <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
-            <field name="arch" type="xml">                
-                <field name="wage" position="before">
-                    <field name="salary_per_h"/>                 
-                </field>                                 
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='wage']" position="before">
+                        <field name="salary_per_h" string="Salary per hour"/>
+                </xpath>
             </field>
         </record>     
     </data>
