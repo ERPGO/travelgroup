@@ -1,2 +1,1 @@
-from . import hr
-from . import hr_contract
+from . import employee_duration
