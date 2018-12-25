@@ -1,0 +1,30 @@
+<odoo>
+    <data>
+        <record id="custom_hr_payslip_evaluation_fields"
+                model="ir.ui.view">
+            <field name="field_parent" eval="False"/>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="mode">extension</field>
+            <field name="model">hr.employee</field>
+            <field name="name">hr.custom_experience_field_form</field>
+            <field name="priority">99</field>
+            <field name="type">form</field>
+            <field name="active" eval="True"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form[1]/sheet[1]/notebook[1]" position="inside">
+                    <page name="studio_page_H5RUR" string="Evaluation">
+                        <group name="studio_group_H5RUR">
+                            <group name="studio_group_H5RUR_left">
+                                <field name="organization_skill" string="Organizational skills"/>
+                                <field name="operational_excellence" string="Operational excellence"/>
+                                <field name="avarage_rate" string="Average rate"/>
+                            </group>
+                            <group name="studio_group_H5RUR_right"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </field>
+    </record>
+</data>
+        </odoo>
