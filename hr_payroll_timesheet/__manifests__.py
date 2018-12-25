@@ -24,10 +24,7 @@
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
-        # 'views/crm2invoice.xml',
-        #'views/automation.xml',
-        #'views/templates.xml',
-        'views/experience.xml',
+         'views/hr_contract_view.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
