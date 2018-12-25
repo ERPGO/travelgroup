@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <record id="hr_contract_view_form_inherit1" model="ir.ui.view">
-            <field name="name">HR Contract Inherit 1</field>
+        <record id="hr_payslip_timesheet_inherit1" model="ir.ui.view">
+            <field name="name">HR Payslip Timesheet Inherit 1</field>
             <field name="model">hr.payslip</field>
             <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
             <field name="arch" type="xml">
