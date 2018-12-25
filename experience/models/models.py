@@ -18,6 +18,6 @@ class Experience(models.Model):
         """Updates experience field when Start date is changed"""
 
         if self.startdate:
-            d1 = datetime.strptime(str(self.startdate), "%Y-%m-%d %H:%M:%S.%f").date()
+            d1 = datetime.strptime(str(self.startdate), "%Y-%m-%d").date()
             d2 = date.today()
             self.experience = relativedelta(d2, d1).years
