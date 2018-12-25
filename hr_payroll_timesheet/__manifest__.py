@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "payroll_timesheet",
+    'name': "hr_payroll_timesheet",
 
     'summary': """
         Adds Employee's start date and shows its experience in years in experience""",
