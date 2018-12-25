@@ -19,7 +19,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
 #
 ##############################################################################
-from openerp import models, fields
+from odoo import models, fields
 class hr_contract(models.Model):
     _name = 'hr.contract'
     _inherit = 'hr.contract'
