@@ -36,4 +36,5 @@ class Evaluation(models.Model):
     @api.onchange('organization_skill', 'operational_excellence')
     def _get_avarage(self):
         for record in self:
-            record['avarage_rate'] = (int(record['organization_skill']) + int(record['operational_excellence'])) / 2
+            if record.organization_skill and record.operational_excellence:
+                record['avarage_rate'] = (int(record['organization_skill']) + int(record['operational_excellence'])) / 2
