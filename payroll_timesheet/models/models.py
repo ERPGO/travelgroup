@@ -6,4 +6,4 @@ class hr_employee(models.Model):
 
     timesheet_ids = fields.One2many('account.analytic.line', 'employee_id', 'Timesheets')
     @api.multi
-    def _
+
