@@ -37,3 +37,4 @@ class Evaluation(models.Model):
     def _get_avarage(self):
         for record in self:
             record['avarage_rate'] = (int(record['organization_skill']) + int(record['operational_excellence'])) / 2
+        return record['avarage_rate']
