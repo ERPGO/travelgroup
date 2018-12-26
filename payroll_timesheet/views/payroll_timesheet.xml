@@ -8,8 +8,7 @@
             <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//form[1]/sheet[1]/notebook[1]" position="inside">
-                    <field name="timesheet_ids" attrs="{'invisible': [('analytic_account_active', '=', False)]}"
-                           context="{'default_employee_id': employee_id, 'default_name':''}">
+                    <field name="timesheet_ids"  context="{'default_employee_id': employee_id, 'default_name':''}">
                         <tree editable="bottom" string="Timesheet Activities" default_order="date">
                             <field name="date"/>
                             <field name="user_id" invisible="1"/>
