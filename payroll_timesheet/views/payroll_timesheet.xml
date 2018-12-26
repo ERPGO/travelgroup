@@ -13,7 +13,7 @@
                             <tree editable="bottom" string="Timesheet Activities" default_order="date">
                                 <field name="date"/>
                                 <field name="user_id" invisible="1"/>
-                                <field name="employee_id" required="1"/>
+                                <field name="employee_id" required="1" context="{'search_employee_id': employee_id, 'default_employee_id': employee_id}"/>
                                 <field name="name"/>
                                 <field name="unit_amount" widget="timesheet_uom"/>
                             </tree>
