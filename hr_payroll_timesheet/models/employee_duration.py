@@ -19,7 +19,8 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
 #
 ##############################################################################
-from odoo import models, api
+from odoo import models, api, fields
+
 
 class hr_employee(models.Model):
     _inherit = 'hr.payslip'
