@@ -8,7 +8,8 @@ class hr_employee(models.Model):
 
     @api.one
     def _get_timesheets(self):
-        timesheets = self.env["account.analytic.line"].search([('employee_id', '=', self.employee_id.name)])
+        timesheets = self.env["account.analytic.line"].search([('employee_id', '=', self.employee_id.name)]),
+        ('date', '>=', self.date_from), ('date', '<=', self.date_to)
         self.timesheet_ids = timesheets
 
 
