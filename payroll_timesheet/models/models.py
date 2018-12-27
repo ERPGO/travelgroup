@@ -1,12 +1,6 @@
 from odoo import models, api, fields
 
 
-class hr_payroll(models.Model):
-    _inherit = 'account.analytic.line'
-
-    payslip = fields.Many2one('hr.payslip', string="Payslip", ondelete='cascade')
-
-
 class hr_payslip(models.Model):
     _inherit = 'hr.payslip'
 
