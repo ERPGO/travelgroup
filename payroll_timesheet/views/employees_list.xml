@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <record id="hr_payslip_timesheet_inherit1"
+        <record id="hr_employees_list_inherit1"
                 model="ir.ui.view">
             <field name="name">Test Employee list inherit</field>
             <field name="model">hr.payslip</field>
