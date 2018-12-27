@@ -12,9 +12,9 @@ class hr_employee(models.Model):
             [('employee_id', '=', self.employee_id.name), ('date', '>=', self.date_from), ('date', '<=', self.date_to)])
         self.timesheet_ids = timesheets
 
-    employee_ids = fields.One2many('hr.employee', compute="_get_employees")
+#    employee_ids = fields.One2many('hr.employee', compute="_get_employees")
 
-    @api.one
-    def _get_employees(self):
-        employee_recordset = self.env["hr.employee"].search([('name', '=', self.employee_id.name)])
-        self.employee_ids = employee_recordset
+#    @api.one
+#    def _get_employees(self):
+#        employee_recordset = self.env["hr.employee"].search([('name', '=', self.employee_id.name)])
+#        self.employee_ids = employee_recordset
