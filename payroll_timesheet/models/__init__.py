@@ -1,2 +1,2 @@
 from . import hr_payslip
-#from . import analytic_account
+from . import analytic_account
