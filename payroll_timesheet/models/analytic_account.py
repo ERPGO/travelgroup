@@ -12,7 +12,7 @@ class AnalyticAccount(models.Model):
     def _check_qty(self):
         min = 0
         max = 100
-        if not min < int('self.percentage_split') < max:
+        if not min < self.percentage_split < max:
             return False
         return True
 
