@@ -5,7 +5,7 @@ class hr_payslip(models.Model):
     _inherit = 'hr.payslip'
 
     timesheet_ids = fields.One2many('account.analytic.line', compute="_get_timesheets")
-    _ids = fields.One2many('account.analytic.line', string="Sum of Timesheet hours",
+    account_ids = fields.One2many('account.analytic.line', string="Sum of Timesheet hours",
                            description="Sum of Timesheet hours",
                            compute="_sum_timesheets")
 
