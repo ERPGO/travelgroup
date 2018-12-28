@@ -13,12 +13,12 @@ class hr_payslip(models.Model):
              ('validated', '=', True)])
         self.timesheet_ids = timesheets
 
-    account_ids = fields.One2Many('account.analytic.account', compute="_sum_timesheets")
+#    account_ids = fields.One2Many('account.analytic.account', compute="_sum_timesheets")
 
-    @api.one
-    def _sum_timesheets(self):
-        all_account_ids = self.env["account.analytic.account"].search([])
-        self.account_ids = all_account_ids
+#    @api.one
+#    def _sum_timesheets(self):
+#        all_account_ids = self.env["account.analytic.account"].search([])
+#        self.account_ids = all_account_ids
 
 #    employee_ids = fields.One2many('hr.employee', compute="_get_employees")
 
