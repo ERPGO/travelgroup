@@ -6,9 +6,9 @@ class hr_payslip(models.Model):
 
     test_field = fields.Char(string="Test field")
     timesheet_ids = fields.One2many('account.analytic.line', compute="_get_timesheets")
-    account_ids = fields.One2many('account.analytic.line', string="Analytic Account", description="Analytic Accounts", compute="_sum_timesheets")
+    account_ids = fields.One2many('account.analytic.line', string="Analytic Account", description="Analytic Accounts",
+                                  compute="_sum_timesheets")
 
-    
     @api.one
     def _get_timesheets(self):
         timesheets = self.env["account.analytic.line"].search(
@@ -16,8 +16,7 @@ class hr_payslip(models.Model):
              ('validated', '=', True)])
         self.timesheet_ids = timesheets
 
-
     @api.one
     def _sum_timesheets(self):
-        all_account_recordset = self.env["account.analytic.line"].search([('account_id', '=', True )])
+        all_account_recordset = self.env["account.analytic.line"].search([('account_id', '=', True)])
         self.account_ids = all_account_recordset
