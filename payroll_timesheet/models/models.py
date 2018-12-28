@@ -13,6 +13,7 @@ class hr_payslip(models.Model):
              ('validated', '=', True)])
         self.timesheet_ids = timesheets
 
+
 #    employee_ids = fields.One2many('hr.employee', compute="_get_employees")
 
 #    @api.one
