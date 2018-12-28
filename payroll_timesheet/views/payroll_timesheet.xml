@@ -23,5 +23,18 @@
                 </xpath>
             </field>
         </record>
+        <!--> Add account_id field to timesheet entry-->
+        <record id="custom_timesheet_view_account_id_form"
+                model="ir.ui.view">
+            <field name="name">account.analytic.line.account_id.form</field>
+            <field name="model">account.analytic.line</field>
+            <field name="inherit_id" ref="timesheet_grid.timesheet_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='employee_id']" position="after">
+                    <field name="account_id"/>
+                </xpath>
+            </field>
+        </record>
+
     </data>
 </odoo>
