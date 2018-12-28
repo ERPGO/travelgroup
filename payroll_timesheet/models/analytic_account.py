@@ -16,4 +16,4 @@ class AnalyticAccount(models.Model):
             return False
         return True
 
-        _constraints = [(_check_qty, 'Please inter other qty !', ['qty'])]
+        _constraints = [(_check_qty, 'Please inter other percentage !', ['percentage'])]
