@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="analytic_account_form_inherit1"
+                model="ir.ui.view">
+            <field name="name">Analytic Account Form inherit</field>
+            <field name="model">account.analytic.account</field>
+            <field name="inherit_id" ref="analytic.view_account_analytic_account_form"/>
+            <field name="arch" type="xml">
+                    <xpath expr="//field[@name='task_id']" position="after">
+                        <field name="account_id"/>
+                    </xpath>
+            </field>
+        </record>
+        <!--> Add account_id field to mytimesheet form-->
+        <record id="custom_timesheet_view_account_id_form"
+                model="ir.ui.view">
+            <field name="name">account.analytic.line.account_id.form</field>
+            <field name="model">account.analytic.line</field>
+            <field name="inherit_id" ref="timesheet_grid.timesheet_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='employee_id']" position="after">
+                    <field name="account_id"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!--> Add account_id field to mytimesheet tree -->
+        <record id="custom_timesheet_view_account_id_tree"
+                model="ir.ui.view">
+            <field name="name">account.analytic.line.account_id.tree</field>
+            <field name="model">account.analytic.line</field>
+            <field name="inherit_id" ref="hr_timesheet.hr_timesheet_line_tree"/>
+            <field name="arch" type="xml">
+                    <xpath expr="//field[@name='partner_id']" position="after">
+                        <field name="percentage_split"/>
+                    </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>
