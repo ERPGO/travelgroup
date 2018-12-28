@@ -7,7 +7,7 @@
     """,
 
     'description': """
-        Payslip according to employee's timesheet
+        Payslip according to employee's timesheet by Nurlan
     """,
 
     'author': "ERGPO",
