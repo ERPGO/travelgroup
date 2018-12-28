@@ -7,9 +7,10 @@ class hr_payslip(models.Model):
     timesheet_ids = fields.One2many('account.analytic.line', compute="_get_timesheets")
 
     @api.one
-    def _get_timesheets( self ):
+    def _get_timesheets(self):
         timesheets = self.env["account.analytic.line"].search(
-            [('employee_id', '=', self.employee_id.name), ('date', '>=', self.date_from), ('date', '<=', self.date_to)])
+            [('employee_id', '=', self.employee_id.name), ('date', '>=', self.date_from), ('date', '<=', self.date_to),
+             ('validated', '=', True)])
         self.timesheet_ids = timesheets
 
 #    employee_ids = fields.One2many('hr.employee', compute="_get_employees")
