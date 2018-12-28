@@ -18,5 +18,5 @@ class hr_payslip(models.Model):
 
     @api.one
     def _sum_timesheets(self):
-        all_account_recordset = self.env["account.analytic.line"].search([('account_id', '=', None)])
+        all_account_recordset = self.env["account.analytic.line"].search([('account_id', '!=', None)])
         self.account_ids = all_account_recordset
