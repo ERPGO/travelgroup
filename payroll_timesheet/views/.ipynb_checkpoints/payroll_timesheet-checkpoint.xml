@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="hr_payslip_timesheet_inherit1"
+                model="ir.ui.view">
+            <field name="name">HR Payslip Timesheet inherit</field>
+            <field name="model">hr.payslip</field>
+            <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form[1]/sheet[1]/notebook[1]" position="inside">
+                    <page name="custom_payslip_timesheet" string="Validated Timesheets">
+                        <field name="timesheet_ids" context="{'default_employee_id': employee_id}"
+                               domain="[('employee_id', '=', employee_id)]">
+                            <tree editable="bottom" string="Validated Timesheets Activities" default_order="date">
+                                <field name="date"/>
+                                <field name="user_id" invisible="1"/>
+                                <field name="employee_id" required="1"/>
+                                <field name="name"/>
+                                <field name="unit_amount" widget="timesheet_uom"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+        <!--> Add account_id field to mytimesheet form-->
+        <record id="custom_timesheet_view_account_id_form"
+                model="ir.ui.view">
+            <field name="name">account.analytic.line.account_id.form</field>
+            <field name="model">account.analytic.line</field>
+            <field name="inherit_id" ref="timesheet_grid.timesheet_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='employee_id']" position="after">
+                    <field name="account_id"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!--> Add account_id field to mytimesheet tree -->
+        <record id="custom_timesheet_view_account_id_tree"
+                model="ir.ui.view">
+            <field name="name">account.analytic.line.account_id.tree</field>
+            <field name="model">account.analytic.line</field>
+            <field name="inherit_id" ref="hr_timesheet.hr_timesheet_line_tree"/>
+            <field name="arch" type="xml">
+                    <xpath expr="//field[@name='task_id']" position="after">
+                        <field name="account_id"/>
+                    </xpath>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>
