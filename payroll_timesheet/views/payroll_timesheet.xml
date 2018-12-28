@@ -23,7 +23,7 @@
                 </xpath>
             </field>
         </record>
-        <!--> Add account_id field to timesheet entry-->
+        <!--> Add account_id field to mytimesheet form-->
         <record id="custom_timesheet_view_account_id_form"
                 model="ir.ui.view">
             <field name="name">account.analytic.line.account_id.form</field>
@@ -35,6 +35,20 @@
                 </xpath>
             </field>
         </record>
+
+        <!--> Add account_id field to mytimesheet tree -->
+        <record id="custom_timesheet_view_account_id_tree"
+                model="ir.ui.view">
+            <field name="name">account.analytic.line.account_id.tree</field>
+            <field name="model">account.analytic.line</field>
+            <field name="inherit_id" ref="hr_timesheet.hr_timesheet_line_tree"/>
+            <field name="arch" type="xml">
+                    <xpath expr="//field[@name='task_id']" position="after">
+                        <field name="account_id"/>
+                    </xpath>
+            </field>
+        </record>
+
 
     </data>
 </odoo>
