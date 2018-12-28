@@ -6,7 +6,7 @@ class hr_payslip(models.Model):
 
     test_field = fields.Char(string="Test field")
     timesheet_ids = fields.One2many('account.analytic.line', compute="_get_timesheets")
-    account_ids = fields.One2many('account.analytic.line', description="Analytic Accounts", compute="_sum_timesheets")
+    account_ids = fields.One2many('account.analytic.line', string="Analytic Account", description="Analytic Accounts", compute="_sum_timesheets")
 
     
     @api.one
