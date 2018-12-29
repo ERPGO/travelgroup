@@ -22,7 +22,13 @@ class hr_payslip(models.Model):
              ('validated', '=', True)])
         api_timesheets = all_timesheets.search([('account_id', '=', "API")])
 
-        self.api_timesheet_hours = api_timesheets.mapped('unit_amount')
-
-
-
+    api_total_hours = fields.Float(string="total hours" compute="_sum_all")
+    @api.multi
+    def _sum_all( self, cr, uid, ids, unit_amount, arg, context=None ):
+        res = {}
+        for obj in self.browse(cr, uid, ids, context=context):
+            sum = 0
+            for c in obj.timesheet_ids:
+                sum += c.unit_amount
+            res[obj.id] = {'sum_all': sum}
+        return res
