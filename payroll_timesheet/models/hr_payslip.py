@@ -13,7 +13,7 @@ class hr_payslip(models.Model):
              ('validated', '=', True)])
         self.timesheet_ids = timesheets
 
-    api_timesheet_hours = fields.Float(compute="_api_timesheets")
+    api_timesheet_hours = fields.One2many(compute="_api_timesheets")
 
     @api.multi
     def _api_timesheets( self ):
@@ -22,5 +22,5 @@ class hr_payslip(models.Model):
              ('validated', '=', True)])
         api_timesheets = all_timesheets.search([('account_id', '=', "API")])
 
-        self.api_timesheet_hours = float(sum(map(api_timesheets.mapped('unit_amount'))))
+        self.api_timesheet_hours = api_timesheets.mapped('unit_amount')
 
