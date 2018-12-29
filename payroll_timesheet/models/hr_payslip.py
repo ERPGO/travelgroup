@@ -21,6 +21,9 @@ class hr_payslip(models.Model):
             [('employee_id', '=', self.employee_id.name), ('date', '>=', self.date_from), ('date', '<=', self.date_to),
              ('validated', '=', True)])
         api_timesheets = all_timesheets.search([('account_id', '=', "API")])
+        self.api_timesheet_hours = api_timesheets
+
+
 
     api_total_hours = fields.Float(string="total hours" compute="_sum_all")
     @api.multi
