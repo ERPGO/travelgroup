@@ -26,8 +26,8 @@ class hr_payslip(models.Model):
 
     @api.multi
     def _total_timesheets( self ):
-        if acc in ('API', 'Vizam'):
-            all_timesheets = self.env["account.analytic.line"].search([('account_id.name', '=', acc)])
+        acc = ('API', 'Vizam')
+        all_timesheets = self.env["account.analytic.line"].search([('account_id.name', '=', acc)])
         return all_timesheets
         self.sum_timesheet_ids = all_timesheets
 
