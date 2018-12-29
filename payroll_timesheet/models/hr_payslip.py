@@ -22,7 +22,7 @@ class hr_payslip(models.Model):
              ('validated', '=', True)])
         api_timesheets = all_timesheets.search([('account_id', '=', "API")])
 
-        self.api_timesheet_hours = api_timesheets
+        self.api_timesheet_hours = api_timesheets.mapped('unit_amount')
 
 
 
