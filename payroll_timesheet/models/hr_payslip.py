@@ -13,15 +13,6 @@ class hr_payslip(models.Model):
              ('validated', '=', True)])
         self.timesheet_ids = timesheets
 
-    account_ids = fields.One2many('account.analytic.line', string="Sum of Timesheet hours",
-                                  description="Sum of Timesheet hours",
-                                  compute="_sum_account_ids")
-
-    @api.one
-    def _sum_account_ids( self ):
-        all_account_recordset = self.env["account.analytic.line"].search([('account_id', '!=', None)])
-        self.account_ids = all_account_recordset.mapped('account_id')
-
     api_timesheet_hours = fields.Float(compute="_api_timesheets")
 
     @api.multi
@@ -31,6 +22,5 @@ class hr_payslip(models.Model):
              ('validated', '=', True)])
         api_timesheets = all_timesheets.search([('account_id', '=', "API")])
 
-        #self.api_timesheet_hours = float(sum(map(api_timesheets.mapped('unit_amount'))))
-        self.api_timesheet_hours = float('100.5234')
+        self.api_timesheet_hours = float(sum(map(api_timesheets.mapped('unit_amount'))))
 
