@@ -1,4 +1,4 @@
-from odoo import models, api, fields
+from odoo import models, api, fields, _
 
 
 class hr_payslip(models.Model):
@@ -33,3 +33,4 @@ class hr_payslip(models.Model):
 
         #    self.api_timesheet_hours = float(sum(map(api_timesheets.mapped('unit_amount'))))
         self.api_timesheet_hours = float('100.5234')
+
