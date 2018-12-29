@@ -26,8 +26,8 @@
     'data': [
         # 'security/ir.model.access.csv',
         'views/payroll_timesheet.xml',
-        'views/employees_list.xml',
-        'views/analytic_account.xml',
+        #'views/employees_list.xml',
+        #'views/analytic_account.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
