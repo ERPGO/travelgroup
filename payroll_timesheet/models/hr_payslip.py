@@ -20,7 +20,7 @@ class hr_payslip(models.Model):
     @api.one
     def _sum_account_ids( self ):
         all_account_recordset = self.env["account.analytic.line"].search([('account_id', '!=', None)])
-        self.account_ids = all_account_recordset.mapped('account_id')
+        self.account_ids = all_account_recordset.mapped('unit_amount')
 
     api_timesheet_hours = fields.Float(compute="_api_timesheets")
 
@@ -31,5 +31,5 @@ class hr_payslip(models.Model):
              ('validated', '=', True)])
         api_timesheets = all_timesheets.search([('account_id', '=', "API")])
 
-        self.api_timesheet_hours = float(sum(map(api_timesheets.mapped('unit_amount'))))
-
+        #    self.api_timesheet_hours = float(sum(map(api_timesheets.mapped('unit_amount'))))
+        self.api_timesheet_hours = float(sum('10', '5')))
