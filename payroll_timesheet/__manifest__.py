@@ -25,7 +25,7 @@
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
-         'views/payroll_timesheet.xml',
+        'views/payroll_timesheet.xml',
         # 'views/employees_list.xml',
         # 'views/analytic_account.xml',
     ],

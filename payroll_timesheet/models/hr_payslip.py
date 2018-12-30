@@ -26,7 +26,7 @@ class hr_payslip(models.Model):
     api_total_hours = fields.Float(string="total hours", compute="_sum_all")
 
     @api.multi
-    def _sum_all(self):
+    def _sum_all( self ):
         res = {}
         for obj in self.browse():
             sum = 0
