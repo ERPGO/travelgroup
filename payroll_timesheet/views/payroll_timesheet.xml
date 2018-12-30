@@ -31,7 +31,8 @@
             <field name="arch" type="xml">
                 <xpath expr="//form[1]/sheet[1]/notebook[1]" position="inside">
                     <page name="custom_custom_page" string="CUSTOM PAGE">
-                        <field name="api_timesheet_hours" strings="total API hours" widget="timesheet_uom"/>
+                        <field name="api_total_hours" strings="total API hours" widget="timesheet_uom"/>
+
                     </page>
                 </xpath>
             </field>
