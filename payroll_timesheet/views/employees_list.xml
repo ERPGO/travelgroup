@@ -18,5 +18,25 @@
                 </xpath>
             </field>
         </record>
+
+        <record id="account_analytic_total_unit_amount"
+                model="ir.ui.view">
+            <field name="name">Total Unit amount </field>
+            <field name="model">hr.payslip</field>
+            <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form[1]/sheet[1]/notebook[1]" position="inside">
+                    <page name="studio_page_y3qsF" string="API total hours">
+                        <group name="studio_group_y3qsF">
+                            <group name="studio_group_y3qsF_left">
+                                <field name="api_total_hours"/>
+                            </group>
+                            <group name="studio_group_y3qsF_right"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
     </data>
 </odoo>
