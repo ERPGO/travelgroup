@@ -26,9 +26,9 @@ class hr_payslip(models.Model):
     api_total_hours = fields.Float(string="total hours", compute="_sum_all")
 
     @api.multi
-    def _sum_all( self, cr, uid, ids, unit_amount, arg, context=None ):
+    def _sum_all(self):
         res = {}
-        for obj in self.browse(cr, uid, ids, context=context):
+        for obj in self.browse():
             sum = 0
             for c in obj.timesheet_ids:
                 sum += c.unit_amount
