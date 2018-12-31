@@ -3,25 +3,25 @@
     <data>
         <record id="hr_payslip_timesheet_inherit1"
                 model="ir.ui.view">
-        <field name="name">HR Payslip Timesheet inherit</field>
-        <field name="model">hr.payslip</field>
-        <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
-        <field name="arch" type="xml">
-            <xpath expr="//form[1]/sheet[1]/notebook[1]" position="inside">
-                <page name="custom_payslip_timesheet" string="Validated Timesheets">
-                    <field name="timesheet_ids" context="{'default_employee_id': employee_id}"
-                           domain="[('employee_id', '=', employee_id)]">
-                        <tree editable="bottom" string="Validated Timesheets Activities" default_order="date">
-                            <field name="date"/>
-                            <field name="user_id" invisible="1"/>
-                            <field name="employee_id" required="1"/>
-                            <field name="name"/>
-                            <field name="unit_amount" widget="timesheet_uom"/>
-                        </tree>
-                    </field>
-                </page>
-            </xpath>
-        </field>
+            <field name="name">HR Payslip Timesheet inherit</field>
+            <field name="model">hr.payslip</field>
+            <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form[1]/sheet[1]/notebook[1]" position="inside">
+                    <page name="custom_payslip_timesheet" string="Validated Timesheets">
+                        <field name="timesheet_ids" context="{'default_employee_id': employee_id}"
+                               domain="[('employee_id', '=', employee_id)]">
+                            <tree editable="bottom" string="Validated Timesheets Activities" default_order="date">
+                                <field name="date"/>
+                                <field name="user_id" invisible="1"/>
+                                <field name="employee_id" required="1"/>
+                                <field name="name"/>
+                                <field name="unit_amount" widget="timesheet_uom"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
         </record>
         <record id="hr_payslip_total_api_form"
                 model="ir.ui.view">
@@ -30,9 +30,15 @@
             <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//form[1]/sheet[1]/notebook[1]" position="inside">
-                    <page name="custom_custom_page" string="CUSTOM PAGE">
-                        <field name="api_total_hours" strings="total API hours" />
-
+                    <page name="custom_custom_page" string="Overhead Allocation values">
+                        <group>
+                            <group string="Timesheets">
+                                <field name="api_total_hours" widget="timesheet_uom"
+                                       string="Total hours for API project"/>
+                            </group>
+                            <group name="overhead percentage" string="Percentage based on total hours">
+                            </group>
+                        </group>
                     </page>
                 </xpath>
             </field>
