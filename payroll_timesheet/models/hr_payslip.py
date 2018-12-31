@@ -9,8 +9,8 @@ class hr_payslip(models.Model):
     @api.one
     def _get_timesheets(self):
         timesheets = self.env["account.analytic.line"].search(
-            '&', [('employee_id', '=', self.employee_id.name), ('date', '>=', self.date_from), ('date', '<=', self.date_to),
-             ('validated', '=', True), '|', ('account_id', '=', 'Vizam'), ('account_id', '=', 'API')])
+            [('employee_id', '=', self.employee_id.name), ('date', '>=', self.date_from), ('date', '<=', self.date_to),
+             ('validated', '=', True), ('|', '|', ('account_id', '=', 'Vizam'), ('account_id', '=', 'API'))])
         self.timesheet_ids = timesheets
 
     api_timesheet_hours = fields.Float(string="API total hours", compute="_api_timesheets_sum")
