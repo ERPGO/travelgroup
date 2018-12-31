@@ -13,15 +13,17 @@ class hr_payslip(models.Model):
              ('validated', '=', True)])
         self.timesheet_ids = timesheets
 
-    api_timesheet_hours = fields.One2many('account.analytic.line', compute="_api_timesheets")
+    api_timesheet_hours = fields.One2many('account.analytic.line', string="API total hours, "
+    compute = "_api_timesheets")
 
-    @api.multi
-    def _api_timesheets(self):
-        all_timesheets = self.env["account.analytic.line"].search(
-            [('employee_id', '=', self.employee_id.name), ('date', '>=', self.date_from), ('date', '<=', self.date_to),
-             ('validated', '=', True)])
-        api_timesheets = all_timesheets.search([('account_id', '=', "API")])
-        self.api_timesheet_hours = api_timesheets
+    @api.depends('timesheet_ids.unit_amount')
+    def _api_timesheets_sum(self):
+        api_timesheets_ids = self.timesheet_ids.search([('account_id', '=', "API")])
+        for obj in self:
+            sum = 0.0
+            for unit in api_timesheets_ids:
+                sum += unit.unit_amount
+            obj.update({'api_timesheet_hours': sum})
 
     api_total_hours = fields.Float(string="total hours", compute="_sum_all")
 
@@ -32,12 +34,3 @@ class hr_payslip(models.Model):
             for unit in obj.timesheet_ids:
                 sum += unit.unit_amount
             obj.update({'api_total_hours': sum})
-
-    unit_amount_ids = fields.One2many('account.analytic.line', compute="_sum_unit_amounts")
-
-    @api.one
-    def _sum_unit_amounts(self):
-        all_timesheets = self.env["account.analytic.line"].search(
-            [('employee_id', '=', self.employee_id.name), ('date', '>=', self.date_from), ('date', '<=', self.date_to),
-             ('validated', '=', True)])
-        self.unit_amount_ids = all_timesheets
