@@ -14,11 +14,11 @@ class hr_payslip(models.Model):
         self.timesheet_ids = timesheets
 
     api_timesheet_hours = fields.One2many('account.analytic.line', string="API total hours",
-                                          compute="_timesheets_hours_sum")
+                                          compute="_timesheets_hours")
     vizam_timesheet_hours = fields.One2many('account.analytic.line', string="VIZAM total hours",
-                                            compute="_timesheets_hours_sum")
+                                            compute="_timesheets_hours")
     backpack_timesheet_hours = fields.One2many('account.analytic.line', string="BackPack total hours",
-                                               compute="_timesheets_hours_sum")
+                                               compute="_timesheets_hours")
 
     @api.depends('timesheet_ids.unit_amount')
     def _timesheets_hours_sum(self):
