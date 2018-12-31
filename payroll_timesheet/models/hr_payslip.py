@@ -30,11 +30,3 @@ class hr_payslip(models.Model):
             for unit in api_timesheets_ids:
                 sum += unit.unit_amount
                 obj.update({'api_timesheet_hours': sum})
-            sum = 0.0
-            for unit in vizam_timesheets_ids:
-                sum += unit.unit_amount
-                obj.update({'vizam_timesheet_hours': sum})
-            sum = 0.0
-            for unit in backpack_timesheets_ids:
-                sum += unit.unit_amount
-                obj.update({'backpack_timesheet_hours': sum})
