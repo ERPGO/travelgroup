@@ -16,7 +16,7 @@
                                 <field name="user_id" invisible="1"/>
                                 <field name="employee_id" required="1"/>
                                 <field name="name"/>
-                                <field name="project_id" />
+                                <field name="project_id"/>
                                 <field name="unit_amount" widget="timesheet_uom"/>
                             </tree>
                         </field>
@@ -35,7 +35,11 @@
                         <group>
                             <group string="Timesheets hours">
                                 <field name="api_total_hours" widget="timesheet_uom"
-                                       string="Total hours for API project"/>
+                                       string="Total hours for API"/>
+                                <field name="vizam_total_hours" widget="timesheet_uom"
+                                       string="Total hours for VIZAM"/>
+                                <field name="backpack_total_hours" widget="timesheet_uom"
+                                       string="Total hours for BackPack"/>
                             </group>
                             <group name="overhead percentage" string="Percentage based on total hours">
                             </group>
