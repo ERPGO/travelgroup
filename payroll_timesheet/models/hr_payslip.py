@@ -27,5 +27,5 @@ class hr_payslip(models.Model):
 
     @api.multi
     def _def_num_projects(self):
-        all_projects = self.timesheet_ids.search(['project_id', '!=', Null])
+        all_projects = self.timesheet_ids.search(['project_id', '!=', None])
         self.total_num_projects = len(all_projects)
