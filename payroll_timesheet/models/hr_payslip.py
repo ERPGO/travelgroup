@@ -35,7 +35,7 @@ class hr_payslip(models.Model):
             res[obj.id] = {'sum_all': sum}
         return res
 
-    unit_amount_ids = fields.One2many('account.analytic.line',comput="_sum_unit_amounts")
+    unit_amount_ids = fields.One2many('account.analytic.line', compute="_sum_unit_amounts")
 
     @api.multi
     def _sum_unit_amounts(self):
