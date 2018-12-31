@@ -42,4 +42,4 @@ class hr_payslip(models.Model):
         all_timesheets = self.env["account.analytic.line"].search(
             [('employee_id', '=', self.employee_id.name), ('date', '>=', self.date_from), ('date', '<=', self.date_to),
              ('validated', '=', True)])
-        self.unit_amount_ids = all_timesheets.mapped('unit_amount')
+        self.unit_amount_ids = all_timesheets
