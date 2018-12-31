@@ -32,7 +32,7 @@ class hr_payslip(models.Model):
             sum = 0
             for c in obj.timesheet_ids:
                 sum += c.unit_amount
-            res[obj.id] = {'sum_all': sum}
+            res[obj.id] = {'api_total_hours': sum}
         return res
 
     unit_amount_ids = fields.One2many('account.analytic.line', compute="_sum_unit_amounts")
