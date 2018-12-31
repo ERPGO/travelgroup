@@ -1,2 +1,2 @@
-# Payslip according to timehseet
+# Payslip according to timehseet.
 # WWW.ERPGO.AZ 
