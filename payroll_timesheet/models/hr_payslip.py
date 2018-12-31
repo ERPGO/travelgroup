@@ -13,7 +13,7 @@ class hr_payslip(models.Model):
              ('validated', '=', True)])
         self.timesheet_ids = timesheets
 
-    api_timesheet_hours = fields.Float(string="API total hours")
+    api_timesheet_hours = fields.Float(string="API total hours", compute="_api_timesheets_sum")
 
     @api.depends('timesheet_ids.unit_amount')
     def _api_timesheets_sum(self):
@@ -24,7 +24,7 @@ class hr_payslip(models.Model):
                 sum += unit.unit_amount
             obj.update({'api_timesheet_hours': sum})
 
-    vizam_timesheet_hours = fields.Float(string="Vizam total hours")
+    vizam_timesheet_hours = fields.Float(string="Vizam total hours", compute="_vizam_timesheets_sum")
 
     @api.depends('timesheet_ids.unit_amount')
     def _vizam_timesheets_sum(self):
@@ -35,7 +35,7 @@ class hr_payslip(models.Model):
                 sum += unit.unit_amount
             obj.update({'vizam_timesheet_hours': sum})
 
-    backpack_timesheet_hours = fields.Float(string="BackPack total hours")
+    backpack_timesheet_hours = fields.Float(string="BackPack total hours", compute="_backpack_timesheets_sum")
 
     @api.depends('timesheet_ids.unit_amount')
     def _backpack_timesheets_sum(self):
