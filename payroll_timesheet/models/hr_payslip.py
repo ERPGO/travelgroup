@@ -13,8 +13,7 @@ class hr_payslip(models.Model):
              ('validated', '=', True)])
         self.timesheet_ids = timesheets
 
-    api_timesheet_hours = fields.One2many('account.analytic.line', string="API total hours, "
-    compute = "_api_timesheets")
+    api_timesheet_hours = fields.One2many('account.analytic.line', string="API total hours", compute="_api_timesheets")
 
     @api.depends('timesheet_ids.unit_amount')
     def _api_timesheets_sum(self):
