@@ -4,7 +4,7 @@ from odoo import models, api, fields, _
 class hr_payslip(models.Model):
     _inherit = 'hr.payslip'
 
-    timesheet_ids = fields.One2many('account.analytic.line', compute="_get_timesheets")
+    timesheet_ids = fields.One2many('account.analytic.line', compute="_get_timesheets", domain="[('account_id','=','Vizam')]")
 
     @api.one
     def _get_timesheets(self):
