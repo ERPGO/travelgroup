@@ -13,35 +13,12 @@ class hr_payslip(models.Model):
              ('validated', '=', True)])
         self.timesheet_ids = timesheets
 
-    api_timesheet_hours = fields.Float(string="API total hours", compute="_api_timesheets_sum")
+    total_project_hours = fields.Float(string="Total project hours", compute="_total_timesheets_sum")
 
     @api.depends('timesheet_ids')
-    def _api_timesheets_sum(self):
-        api_timesheets_ids = self.timesheet_ids.search([('account_id', '=', "API")])
+    def _total_timesheets_sum(self):
         for obj in self:
             sum = 0.0
-            for unit in api_timesheets_ids:
+            for unit in total_project_ids:
                 sum += unit.unit_amount
-            obj.update({'api_timesheet_hours': sum})
-
-    vizam_timesheet_hours = fields.Float(string="Vizam total hours", compute="_vizam_timesheets_sum")
-
-    @api.depends('timesheet_ids')
-    def _vizam_timesheets_sum(self):
-        vizam_timesheets_ids = self.timesheet_ids.search([('account_id', '=', "Vizam")])
-        for obj in self:
-            sum = 0.0
-            for unit in vizam_timesheets_ids:
-                sum += unit.unit_amount
-            obj.update({'vizam_timesheet_hours': sum})
-
-    backpack_timesheet_hours = fields.Float(string="BackPack total hours", compute="_backpack_timesheets_sum")
-
-    @api.depends('timesheet_ids')
-    def _backpack_timesheets_sum(self):
-        backpack_timesheets_ids = self.timesheet_ids.search([('account_id', '=', "BackPack")])
-        for obj in self:
-            sum = 0.0
-            for unit in backpack_timesheets_ids:
-                sum += unit.unit_amount
-            obj.update({'backpack_timesheet_hours': sum})
+            obj.update({'total_project_hours': sum})

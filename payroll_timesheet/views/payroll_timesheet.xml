@@ -33,12 +33,8 @@
                     <page name="custom_custom_page" string="Overhead Allocation values">
                         <group>
                             <group string="Timesheets hours">
-                                <field name="api_timesheet_hours"
-                                       string="Total API(hours)"/>
-                                <field name="vizam_timesheet_hours"
-                                       string="Total Vizam(hours)"/>
-                                <field name="backpack_timesheet_hours"
-                                       string="Total BackPack(hours)"/>
+                                <field name="total_timesheet_hours"
+                                       string="Total Project Hours"/>
                             </group>
                             <group name="overhead percentage" string="Percentage based on total hours">
                             </group>
