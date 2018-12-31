@@ -19,6 +19,6 @@ class hr_payslip(models.Model):
     def _total_timesheets_sum(self):
         for obj in self:
             sum = 0.0
-            for unit in timesheet_ids:
+            for unit in self.timesheet_ids:
                 sum += unit.unit_amount
             obj.update({'total_project_hours': sum})
