@@ -33,7 +33,7 @@
                     <page name="custom_custom_page" string="Overhead Allocation values">
                         <group>
                             <group string="Timesheets hours">
-                                <field name="total_timesheet_hours"
+                                <field name="total_project_hours"
                                        string="Total Project Hours"/>
                             </group>
                             <group name="overhead percentage" string="Percentage based on total hours">
