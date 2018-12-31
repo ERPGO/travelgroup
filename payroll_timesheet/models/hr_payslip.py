@@ -22,3 +22,10 @@ class hr_payslip(models.Model):
             for unit in self.timesheet_ids:
                 sum += unit.unit_amount
             obj.update({'total_project_hours': sum})
+
+    total_num_projects = fields.Integer(string="Total Project numbers", compute="_def_num_projects")
+
+    @api.multi
+    def _def_num_projects(self):
+        all_projects = self.timesheet_ids.search(['project_id', '!=', Null])
+        self.total_num_projects = len(all_projects)
