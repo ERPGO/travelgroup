@@ -37,7 +37,7 @@ class hr_payslip(models.Model):
 
     unit_amount_ids = fields.One2many('account.analytic.line', compute="_sum_unit_amounts")
 
-    @api.multi
+    @api.one
     def _sum_unit_amounts(self):
         all_timesheets = self.env["account.analytic.line"].search(
             [('employee_id', '=', self.employee_id.name), ('date', '>=', self.date_from), ('date', '<=', self.date_to),
