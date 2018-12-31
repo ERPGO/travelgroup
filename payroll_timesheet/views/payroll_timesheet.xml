@@ -38,8 +38,8 @@
                                        string="Total API(hours)"/>
                                 <field name="vizam_timesheet_hours"
                                        string="Total Vizam(hours)"/>
-                                <field name="Total BackPack(hours)"
-                                       string="Total hours for BackPack"/>
+                                <field name="backpack_timesheet_hours"
+                                       string="Total BackPack(hours)"/>
                             </group>
                             <group name="overhead percentage" string="Percentage based on total hours">
                             </group>
