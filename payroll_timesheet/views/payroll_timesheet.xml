@@ -16,6 +16,7 @@
                                 <field name="user_id" invisible="1"/>
                                 <field name="employee_id" required="1"/>
                                 <field name="name"/>
+                                <field name="project_id" />
                                 <field name="unit_amount" widget="timesheet_uom"/>
                             </tree>
                         </field>
@@ -32,7 +33,7 @@
                 <xpath expr="//form[1]/sheet[1]/notebook[1]" position="inside">
                     <page name="custom_custom_page" string="Overhead Allocation values">
                         <group>
-                            <group string="Timesheets">
+                            <group string="Timesheets hours">
                                 <field name="api_total_hours" widget="timesheet_uom"
                                        string="Total hours for API project"/>
                             </group>
@@ -43,6 +44,5 @@
                 </xpath>
             </field>
         </record>
-
     </data>
 </odoo>
