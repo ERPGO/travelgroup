@@ -15,7 +15,7 @@ class hr_payslip(models.Model):
 
     api_timesheet_hours = fields.One2many('account.analytic.line', string="API total hours", compute="_timesheets_hours_sum")
     vizam_timesheet_hours = fields.One2many('account.analytic.line', string="VIZAM total hours", compute="_timesheets_hours_sum")
-    backpack_timesheet_hours = fields.One2many('account.analytic.line', string="BackPack total hours", compute="_timesheets_hours_sum")
+    backpack_timesheet_hours = fields.One2many('account.analytic.line', string="BackPack total hours")
 
     @api.depends('timesheet_ids.unit_amount')
     def _timesheets_hours_sum(self):
@@ -26,11 +26,11 @@ class hr_payslip(models.Model):
             sum = 0.0
             for unit in api_timesheets_ids:
                 sum += unit.unit_amount
-            obj.update({'api_timesheet_hours': sum})
+                obj.update({'api_timesheet_hours': sum})
             for unit in vizam_timesheets_ids:
                 sum += unit.unit_amount
-            obj.update({'vizam_timesheet_hours': sum})
+                obj.update({'vizam_timesheet_hours': sum})
             for unit in backpack_timesheets_ids:
                 sum += unit.unit_amount
-            obj.update({'backpack_timesheet_hours': sum})
+                obj.update({'backpack_timesheet_hours': sum})
 
