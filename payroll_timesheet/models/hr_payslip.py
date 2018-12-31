@@ -10,7 +10,7 @@ class hr_payslip(models.Model):
     def _get_timesheets(self):
         timesheets = self.env["account.analytic.line"].search(
             [('employee_id', '=', self.employee_id.name), ('date', '>=', self.date_from), ('date', '<=', self.date_to),
-             ('validated', '=', True), '|', ('account_id', '=', "Vizam"), ('account_id', '=', "BackPack"),
+             ('validated', '=', True), ('account_id', '=', "Vizam"), ('account_id', '=', "BackPack"),
              ('account_id', '=', "API")])
         self.timesheet_ids = timesheets
 
