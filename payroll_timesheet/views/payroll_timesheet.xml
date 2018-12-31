@@ -35,7 +35,7 @@
                             <group string="Timesheets hours">
                                 <field name="total_project_hours"
                                        string="Total Project Hours"/>
-                                <field name="total_num_projects" string="Total Project numbers" />
+                                <field name="total_num_projects" string="Total Project numbers"/>
                             </group>
                             <group name="overhead percentage" string="Percentage based on total hours">
                             </group>
