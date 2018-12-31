@@ -16,7 +16,7 @@
                                 <field name="employee_id" required="1"/>
                                 <field name="name"/>
                                 <field name="project_id"/>
-                                <field name="unit_amount" widget="timesheet_uom"/>
+                                <field name="unit_amount" sum="Total" widget="timesheet_uom"/>
                             </tree>
                         </field>
                     </page>
