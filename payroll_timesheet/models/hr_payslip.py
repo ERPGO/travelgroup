@@ -20,7 +20,7 @@ class hr_payslip(models.Model):
     @api.depends('timesheet_ids.unit_amount')
     def _api_timesheets_sum(self):
         api_timesheets_ids = self.timesheet_ids.search([('account_id', '=', "API")])
-        vizam_timesheets_ids = self.timesheet_ids.search([('account_id', '=', "VIZAM")])
+        vizam_timesheets_ids = self.timesheet_ids.search([('account_id', '=', "Vizam")])
         backpack_timesheets_ids = self.timesheet_ids.search([('account_id', '=', "BackPack")])
         for obj in self:
             sum = 0.0
@@ -33,3 +33,4 @@ class hr_payslip(models.Model):
             for unit in backpack_timesheets_ids:
                 sum += unit.unit_amount
             obj.update({'backpack_timesheet_hours': sum})
+
