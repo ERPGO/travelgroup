@@ -74,6 +74,5 @@ class hr_payslip(models.Model):
 
     @api.depends('total_project_hours')
     def _project_percentage( self ):
-        self.api_percentage = self.api_project_hours / self.total_project_hours * 100
-        self.vizam_percentage = self.vizam_project_hours / self.total_project_hours * 100
-        self.backpack_percentage = self.backpack_project_hours / self.total_project_hours * 100
+        api_split = self.api_project_hours / self.total_project_hours * 100
+        self.api_percentage = api_split
