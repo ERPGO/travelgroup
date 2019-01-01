@@ -45,7 +45,7 @@ class hr_payslip(models.Model):
     vizam_project_hours = fields.Float(string="Vizam project hours", compute="_vizam_timesheet_sum")
 
 
-    @vizam.depends('timesheet_ids')
+    @api.depends('timesheet_ids')
     def _vizam_timesheet_sum( self ):
         vizam_timesheet_ids = self.env["account.analytic.line"].search(
             [('employee_id', '=', self.employee_id.name), ('date', '>=', self.date_from), ('date', '<=', self.date_to),
@@ -55,3 +55,17 @@ class hr_payslip(models.Model):
             for unit in vizam_timesheet_ids:
                 sum += unit.unit_amount
             obj.update({'vizam_project_hours': sum})
+
+    backpack_project_hours = fields.Float(string="BackPack project hours", compute="_backpack_timesheet_sum")
+
+
+    @api.depends('timesheet_ids')
+    def _backpack_timesheet_sum( self ):
+        backpack_timesheet_ids = self.env["account.analytic.line"].search(
+            [('employee_id', '=', self.employee_id.name), ('date', '>=', self.date_from), ('date', '<=', self.date_to),
+             ('validated', '=', True), ('account_id', '=', 'BackPack')])
+        for obj in self:
+            sum = 0.0
+            for unit in backpack_timesheet_ids:
+                sum += unit.unit_amount
+            obj.update({'backpack_project_hours': sum})
