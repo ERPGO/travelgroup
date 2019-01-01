@@ -74,7 +74,7 @@ class hr_payslip(models.Model):
 
     @api.depends('total_project_hours')
     def _project_percentage( self ):
-        if self.total_project_hours > '0':
+        if self.total_project_hours > '0.0':
             api_split = self.api_project_hours / self.total_project_hours * 100
             self.api_percentage = api_split
             vizam_split = self.vizam_project_hours / self.total_project_hours * 100
