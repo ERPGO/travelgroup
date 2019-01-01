@@ -97,6 +97,6 @@ class hr_payslip(models.Model):
 #            lines = [(0, 0, line) for line in self._get_payslip_lines(contract_ids, payslip.id)]
             input_ids = (0, 0, {'name': "API", 'rate': self.api_percentage})
 
-            payslip.write({'line_ids': input_ids, 'number': number})
+            payslip.write({'line_ids[0]': input_ids, 'number': number})
         return True
 
