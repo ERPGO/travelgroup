@@ -95,8 +95,7 @@ class hr_payslip(models.Model):
             contract_ids = payslip.contract_id.ids or \
                 self.get_contract(payslip.employee_id, payslip.date_from, payslip.date_to)
 #            lines = [(0, 0, line) for line in self._get_payslip_lines(contract_ids, payslip.id)]
-            input_id = {'value': 'fixed',
-                        'name': "API",
+            input_id = {'name': "API",
                         'rate': self.api_percentage}
 
             payslip.write({'line_ids': input_id, 'number': number})
