@@ -33,7 +33,7 @@ class hr_payslip(models.Model):
 
     @api.depends('timesheet_ids')
     def _api_timesheet_sum( self ):
-        api_timesheet_ids = self.timesheet_ids.search[('account_id', '=', 'API')]
+        api_timesheet_ids = self.timesheet_ids.browse[('account_id', '=', 'API')]
         for obj in self:
             sum = 0.0
             for unit in api_timesheet_ids:
