@@ -44,7 +44,6 @@ class hr_payslip(models.Model):
 
     vizam_project_hours = fields.Float(string="Vizam project hours", compute="_vizam_timesheet_sum")
 
-
     @api.depends('timesheet_ids')
     def _vizam_timesheet_sum( self ):
         vizam_timesheet_ids = self.env["account.analytic.line"].search(
@@ -58,7 +57,6 @@ class hr_payslip(models.Model):
 
     backpack_project_hours = fields.Float(string="BackPack project hours", compute="_backpack_timesheet_sum")
 
-
     @api.depends('timesheet_ids')
     def _backpack_timesheet_sum( self ):
         backpack_timesheet_ids = self.env["account.analytic.line"].search(
@@ -69,3 +67,13 @@ class hr_payslip(models.Model):
             for unit in backpack_timesheet_ids:
                 sum += unit.unit_amount
             obj.update({'backpack_project_hours': sum})
+
+    api_percentage = fields.Integer(string="API split", compute="_project_percentage")
+    vizam_percentage = fields.Integer(string="Vizam split", compute="_project_percentage")
+    backpack_percentage = fields.Integer(string="BackPack split", compute="_project_percentage")
+
+    @api.depends('total_project_hours')
+    def _project_percentage( self ):
+        self.api_percentage = self.api_project_hours / self.total_project_hours
+        self.vizam_percentage = self.vizam_project_hours / self.total_project_hours
+        self.backpack_percentage = self.backpack_project_hours / self.total_project_hours
