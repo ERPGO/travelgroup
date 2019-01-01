@@ -97,5 +97,5 @@ class hr_payslip(models.Model):
 
             for line in self.line_ids:
                 if line.code is 'API':
-                    line.update({'rate': self.api_percentage})
+                    line.write({'rate': self.api_percentage})
         return True
