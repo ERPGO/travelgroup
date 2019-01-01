@@ -40,7 +40,10 @@
                                 <field name="vizam_project_hours" string="Vizam project hours"/>
                                 <field name="backpack_project_hours" string="BackPack project hours"/>
                             </group>
-                            <group name="overhead percentage" string="Percentage based on total hours">
+                            <group name="overhead percentage" string="Project Splits">
+                                <field name="api_percentage" string="API Split"/>
+                                <field name="vizam_percentage" string="Vizam Split"/>
+                                <field name="backpack_percentage" string="BackPack Split"/>
                             </group>
                         </group>
                     </page>
