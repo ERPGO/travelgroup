@@ -35,8 +35,9 @@
                             <group string="Timesheets hours">
                                 <field name="total_project_hours"
                                        string="Total Project Hours"/>
-                                <field name="total_num_projects" string="Total number of Projects" />
+                                <field name="total_num_projects" string="Total number of Projects"/>
                                 <field name="api_project_hours" string="API project hours"/>
+                                <field name="vizam_project_hours" string="Vizam project hours"/>
                             </group>
                             <group name="overhead percentage" string="Percentage based on total hours">
                             </group>
