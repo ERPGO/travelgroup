@@ -83,12 +83,6 @@ class hr_payslip(models.Model):
             self.backpack_percentage = backpack_split
 
 
-    @api.multi
-    def line_id_create( self ):
-        input_id = {'value': 'fixed',
-                    'name': "API",
-                    'rate': self.api_percentage}
-        return input_id
 
     @api.multi
     def compute_sheet(self):
@@ -101,7 +95,10 @@ class hr_payslip(models.Model):
             contract_ids = payslip.contract_id.ids or \
                 self.get_contract(payslip.employee_id, payslip.date_from, payslip.date_to)
 #            lines = [(0, 0, line) for line in self._get_payslip_lines(contract_ids, payslip.id)]
+            input_id = {'value': 'fixed',
+                        'name': "API",
+                        'rate': self.api_percentage}
 
-            payslip.write({'line_ids': self.input_id, 'number': number})
+            payslip.write({'line_ids': input_id, 'number': number})
         return True
 
