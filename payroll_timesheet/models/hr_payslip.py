@@ -68,15 +68,16 @@ class hr_payslip(models.Model):
                 sum += unit.unit_amount
             obj.update({'backpack_project_hours': sum})
 
-    api_percentage = fields.Float(string="API split", compute="_project_percentage")
-    vizam_percentage = fields.Float(string="Vizam split", compute="_project_percentage")
-    backpack_percentage = fields.Float(string="BackPack split", compute="_project_percentage")
+    api_percentage = fields.Float(string="API split")
+    vizam_percentage = fields.Float(string="Vizam split")
+    backpack_percentage = fields.Float(string="BackPack split")
 
     @api.depends('total_project_hours')
     def _project_percentage( self ):
-        api_split = self.api_project_hours / self.total_project_hours * 100
-        self.api_percentage = api_split
-        vizam_split = self.vizam_project_hours / self.total_project_hours * 100
-        self.vizam_percentage = vizam_split
-        backpack_split = self.backpack_project_hours / self.total_project_hours * 100
-        self.backpack_percentage = backpack_split
+        if self.total_project_hours > '0':
+            api_split = self.api_project_hours / self.total_project_hours * 100
+            self.api_percentage = api_split
+            vizam_split = self.vizam_project_hours / self.total_project_hours * 100
+            self.vizam_percentage = vizam_split
+            backpack_split = self.backpack_project_hours / self.total_project_hours * 100
+            self.backpack_percentage = backpack_split
