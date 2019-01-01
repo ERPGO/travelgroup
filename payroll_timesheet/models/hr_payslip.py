@@ -83,7 +83,7 @@ class hr_payslip(models.Model):
             self.backpack_percentage = backpack_split
 
     @api.multi
-    def compute_sheet( self ):
+    def compute_sheet(self):
         for payslip in self:
             number = payslip.number or self.env['ir.sequence'].next_by_code('salary.slip')
             # delete old payslip lines
@@ -91,14 +91,7 @@ class hr_payslip(models.Model):
             # set the list of contract for which the rules have to be applied
             # if we don't give the contract, then the rules to apply should be for all current contracts of the employee
             contract_ids = payslip.contract_id.ids or \
-                           self.get_contract(payslip.employee_id, payslip.date_from, payslip.date_to)
-            #            lines = [(0, 0, line) for line in self._get_payslip_lines(contract_ids, payslip.id)]
-            if self.api_percentage:
-                api_inputs =
-            accounts = self.timesheet_ids.mapped('account_id')
-            for account in accounts:
-                input_ids = [(0, 0, {'name': account, 'code': account, 'amount': "1", 'salary_rule_id': "1", 'category_id': "1",
-                                     'rate': self.api_percentage})]
-
-            payslip.write({'line_ids': input_ids, 'number': number})
+                self.get_contract(payslip.employee_id, payslip.date_from, payslip.date_to)
+            lines = [(0, 0, line) for line in self._get_payslip_lines(contract_ids, payslip.id)]
+            payslip.write({'line_ids': lines, 'number': number})
         return True
