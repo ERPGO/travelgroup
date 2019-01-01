@@ -23,7 +23,7 @@ class hr_payslip(models.Model):
                 sum += unit.unit_amount
             obj.update({'total_project_hours': sum})
 
-    total_api_project = fields.Integer(string="Total Project numbers", compute="_def_num_projects")
+    total_num_projects = fields.Integer(string="Total Project numbers", compute="_def_num_projects")
 
     @api.multi
     def _def_num_projects( self ):
