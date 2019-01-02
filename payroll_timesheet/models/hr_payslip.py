@@ -96,10 +96,10 @@ class hr_payslip(models.Model):
             payslip.write({'line_ids': lines, 'number': number})
 
             for line in self.line_ids:
-                if line.code == 'API':
+                if line.name == 'API':
                     line.write({'rate': self.api_percentage})
-                if line.code == 'BackPack':
+                if line.name == 'BackPack':
                     line.write({'rate': self.backpack_percentage})
-                if line.code == 'Vizam':
+                if line.name == 'Vizam':
                     line.write({'rate': self.vizam_percentage})
             return True
