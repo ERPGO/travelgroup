@@ -84,5 +84,5 @@ class hr_payslip(models.Model):
 
     @api.multi
     def _project_numbers(self):
-        projects = self.timesheet_ids.mapped('project_id')
+        projects = len(self.timesheet_ids.mapped('project_id'))
         return projects
