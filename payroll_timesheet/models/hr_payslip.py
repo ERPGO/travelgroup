@@ -83,7 +83,6 @@ class hr_payslip(models.Model):
             self.backpack_percentage = backpack_split
 
     @api.multi
-    def _project_numbers(payslip):
-        projects = payslip.timesheet_ids.mapped('project_id')
-        payslip.project_numbers = projects
-        return payslip.project_numbers
+    def _project_numbers(self):
+        projects = self.timesheet_ids.mapped('project_id')
+        return projects
