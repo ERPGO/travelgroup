@@ -86,3 +86,4 @@ class hr_payslip(models.Model):
     def _project_percentage(payslip):
         projects = payslip.timesheet_ids.mapped('project_id')
         payslip.project_numbers = projects
+        return payslip.project_numbers
