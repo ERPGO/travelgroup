@@ -23,15 +23,32 @@ class Experience(models.Model):
             self.experience = relativedelta(d2, d1).years
 
 
-class Evaluation(models.Model):
+class PayrollBonus(models.Model):
     _name = 'payroll_timesheet.bonus'
     _description = 'Bonus for Timesheet app'
+
+    bonus_amount = fields.Float(string="Bonus Amount")
+    bonus_month = fields.Date(string="Bonus Date")
+
+
+class BonusLine(models.Model):
+    _name = 'payroll_timesheet.bonus.line'
+    _description = 'Bonus Lines'
+    bonus = fields.Many2one('payroll_timesheet.bonus')
+    bonus_amount = fields.Float(related="bonus.bonus_amount", string="Bonus Amount")
+    bonus_month = fields.Date(related="bonus.bonus_month", string="Bonus Date", readonly=True)
+
+    @api.depends('payslip_id')
+    def _set_bonus_month(self):
+        for record in self:
+            record.bonus_month = record.payslip_id.date_from
+
+
     organization_skill = fields.Selection([["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"]])
     operational_excellence = fields.Selection([["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"]])
     kpi_score = fields.Float(string="KPI Score", readonly=True, stored=True, compute='_get_avarage')
-
-    employee_id = fields.Many2one('hr.employee', string="Employee")
-    payslip_id = fields.Many2one('hr.payslip', string="Payslip")
+    employee_id = fields.Many2one('hr.employee', string="Employee", required=True)
+    payslip_id = fields.Many2one('hr.payslip', string="Payslip",)
     experience = fields.Integer(related='employee_id.experience', string="Experience(years)", readonly=True)
 
     @api.onchange('organization_skill', 'operational_excellence')
