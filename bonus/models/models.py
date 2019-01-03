@@ -24,8 +24,8 @@ class Experience(models.Model):
 
 
 class Evaluation(models.Model):
-    _inherit = 'payroll_timesheet.bonus'
-
+    _name = 'payroll_timesheet.bonus'
+    _description = 'Bonus for Timesheet app'
     organization_skill = fields.Selection([["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"]])
     operational_excellence = fields.Selection([["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"]])
     kpi_score = fields.Float(string="KPI Score", readonly=True, stored=True, compute='_get_avarage')
