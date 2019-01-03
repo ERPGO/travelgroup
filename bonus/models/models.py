@@ -34,11 +34,8 @@ class Evaluation(models.Model):
     payslip_id = fields.Many2one('hr.payslip', string="Payslip")
     experience = fields.Integer(related='employee_id.experience', string="Experience(years)", readonly=True)
 
-
-
-    @api.multi
     @api.onchange('organization_skill', 'operational_excellence')
     def _get_avarage(self):
         for record in self:
             if record.organization_skill and record.operational_excellence:
-                record['avarage_rate'] = (int(record['organization_skill']) + int(record['operational_excellence'])) / 2
+                record['kpi_score'] = (int(record['organization_skill']) + int(record['operational_excellence'])) / 2

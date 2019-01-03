@@ -10,8 +10,12 @@
                 <xpath expr="//form[1]/sheet[1]/notebook[1]" position="inside">
                     <page name="test_account_ids" string="Analytic accounts">
                         <field name="account_ids">
-                            <tree editable="bottom" string="Analytic accounts">
-                                <field name="name"/>
+                            <tree editable="bottom" string="Bonus for Timesheet app">
+                                <field name="employee_id"/>
+                                <field name="payslip_id"/>
+                                <field name="organization_skill"/>
+                                <field name="operational_excellence"/>
+                                <field name="kpi_score"/>
                             </tree>
                         </field>
                     </page>
@@ -21,7 +25,7 @@
 
         <record id="account_analytic_total_unit_amount"
                 model="ir.ui.view">
-            <field name="name">Total Unit amount </field>
+            <field name="name">Total Unit amount</field>
             <field name="model">hr.payslip</field>
             <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
             <field name="arch" type="xml">
