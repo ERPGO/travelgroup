@@ -82,6 +82,3 @@ class hr_payslip(models.Model):
             backpack_split = self.backpack_project_hours / self.total_project_hours * 100
             self.backpack_percentage = backpack_split
 
-    @api.multi
-    def _project_numbers(self):
-        return 99.99

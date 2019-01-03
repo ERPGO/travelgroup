@@ -28,8 +28,6 @@ class Evaluation(models.Model):
 
     organization_skill = fields.Selection([["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"]])
     operational_excellence = fields.Selection([["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"]])
-#    organization_skill = fields.Integer(string="Organization Skill")
-#    operational_excellence = fields.Integer(string="Excellence")
     avarage_rate = fields.Float(string="Avarage rate", readonly=True, stored=True, compute='_get_avarage')
 
     @api.multi
