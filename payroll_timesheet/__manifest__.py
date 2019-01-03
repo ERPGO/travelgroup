@@ -20,25 +20,17 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-<<<<<<< HEAD:experience/__manifest__.py
-    'depends': ['base', 'hr', 'hr_payroll'],
-=======
     'depends': ['base', 'hr', 'timesheet_grid', 'hr_payroll', 'hr_payroll_account', 'account_accountant'],
->>>>>>> timesheet:payroll_timesheet/__manifest__.py
-
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
-<<<<<<< HEAD:experience/__manifest__.py
         # 'views/crm2invoice.xml',
         #'views/automation.xml',
         'views/avarage_rate.xml',
         'views/experience.xml',
-=======
         'views/payroll_timesheet.xml',
         # 'views/employees_list.xml',
         # 'views/analytic_account.xml',
->>>>>>> timesheet:payroll_timesheet/__manifest__.py
     ],
     # only loaded in demonstration mode
     'demo': [
