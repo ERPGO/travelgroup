@@ -28,7 +28,7 @@
         #'views/automation.xml',
         #'views/avarage_rate.xml',
         #'views/experience.xml',
-        'views/payroll_timesheet.xml',
+        #'views/payroll_timesheet.xml',
         # 'views/employees_list.xml',
         # 'views/analytic_account.xml',
     ],
