@@ -23,7 +23,7 @@
     'depends': ['base', 'hr', 'payroll_timesheet'],
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
+        'security/ir.model.access.csv',
         # 'views/crm2invoice.xml',
         #'views/automation.xml',
         #'views/avarage_rate.xml',
