@@ -32,7 +32,7 @@ class Evaluation(models.Model):
 
     employee_id = fields.Many2one('hr.employee', string="Employee")
     payslip_id = fields.Many2one('hr.payslip', string="Payslip")
-    experience = fields.Float(related='hr.employee.experience', string="Experience(years)", readonly=True)
+    experience = fields.Float(related='employee_id.experience', string="Experience(years)", readonly=True)
 
 
 
