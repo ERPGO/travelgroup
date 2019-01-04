@@ -12,7 +12,7 @@ class Experience(models.Model):
     is_bonus_eligible = fields.Boolean(string="Eligible for Bonus")
     startdate = fields.Date(string='Start Date')
 
-    experience = fields.Integer(string="Experience(years)")
+    experience = fields.Float(string="Experience(years)")
 
     @api.onchange('startdate')
     def _set_experience(self):
@@ -49,7 +49,7 @@ class Evaluation(models.Model):
                 sum += unit.kpi_score
                 obj.update({'total_kpi': sum})
 
-    total_experience = fields.Float(string="Total KPI", compute="_get_total_experience")
+    total_experience = fields.Floattotal_experience = fields.Float(string="Total KPI", compute="_get_total_experience")
 
     @api.depends('evaluation_lines')
     def _get_total_experience(self):
