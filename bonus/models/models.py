@@ -12,7 +12,7 @@ class Experience(models.Model):
     is_bonus_eligible = fields.Boolean(string="Eligible for Bonus")
     startdate = fields.Date(string='Start Date')
 
-    experience = fields.Float(string="Experience(years)")
+    experience = fields.Integer(string="Experience(years)")
 
     @api.onchange('startdate')
     def _set_experience(self):
@@ -49,7 +49,7 @@ class Evaluation(models.Model):
                 sum += unit.kpi_score
                 obj.update({'total_kpi': sum})
 
-    total_experience = fields.Float(string="Total KPI", compute="_get_total_experience")
+    total_experience = fields.Integer(string="Total KPI", compute="_get_total_experience")
 
     @api.depends('evaluation_lines')
     def _get_total_experience(self):
@@ -69,7 +69,7 @@ class EvaluationLine(models.Model):
     organization_skill = fields.Selection([["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"]])
     operational_excellence = fields.Selection([["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"]])
     kpi_score = fields.Float(string="KPI Score", readonly=True, stored=True, compute='_get_avarage')
-    experience = fields.Float(related='employee_id.experience', string="Experience(years)", readonly=True)
+    experience = fields.Integer(related='employee_id.experience', string="Experience(years)", readonly=True)
 
     @api.onchange('organization_skill', 'operational_excellence')
     def _get_avarage(self):
@@ -85,7 +85,7 @@ class HRPayslipEval(models.Model):
     evaluation_lines = fields.One2many(string="Employee Evaluations", related='evaluation_id.evaluation_lines')
     bonus_amount = fields.Float(string="Bonus Amount", related='evaluation_id.bonus_amount')
     total_kpi = fields.Float(string="Total KPI score", related='evaluation_id.total_kpi')
-    total_experience = fields.Float(related='evaluation_id.total_experience', string="Total Experience")
+    total_experience = fields.Integer(related='evaluation_id.total_experience', string="Total Experience")
 
 
 
