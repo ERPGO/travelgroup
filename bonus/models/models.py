@@ -69,7 +69,7 @@ class EvaluationLine(models.Model):
     organization_skill = fields.Selection([["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"]])
     operational_excellence = fields.Selection([["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"]])
     kpi_score = fields.Float(string="KPI Score", readonly=True, stored=True, compute='_get_avarage')
-    experience = fields.Integer(related='employee_id.experience', string="Experience(years)", readonly=True)
+    experience = fields.Float(related='employee_id.experience', string="Experience(years)", readonly=True)
 
     @api.onchange('organization_skill', 'operational_excellence')
     def _get_avarage(self):
@@ -85,7 +85,7 @@ class HRPayslipEval(models.Model):
     evaluation_lines = fields.One2many(string="Employee Evaluations", related='evaluation_id.evaluation_lines')
     bonus_amount = fields.Float(string="Bonus Amount", related='evaluation_id.bonus_amount')
     total_kpi = fields.Float(string="Total KPI score", related='evaluation_id.total_kpi')
-    total_experience = fields.Integer(related='evaluation_id.total_experience', string="Total Experience")
+    total_experience = fields.Float(related='evaluation_id.total_experience', string="Total Experience")
 
 
 
