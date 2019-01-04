@@ -24,13 +24,7 @@
     # always loaded
     'data': [
         'security/ir.model.access.csv',
-        # 'views/crm2invoice.xml',
-        #'views/automation.xml',
-        #'views/avarage_rate.xml',
-        #'views/experience.xml',
-        #'views/payroll_timesheet.xml',
-        # 'views/employees_list.xml',
-        # 'views/analytic_account.xml',
+        'views/bonus_calculation.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

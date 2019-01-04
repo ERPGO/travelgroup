@@ -1,0 +1,140 @@
+<odoo>
+    <data>
+        <record id="bonus_calculation_view_form"
+                model="ir.ui.view">
+            <field name="field_parent" eval="False"/>
+            <field name="model">bonus_calculation</field>
+            <field name="name">Bonus Calculation View Form</field>
+            <field name="type">form</field>
+            <field name="active" eval="True"/>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet string="Bonus for Timesheet app">
+                        <group col="4">
+                            <field name="name" modifiers="{}"/>
+                            <field name="bonus_amount" modifiers="{}"/>
+                            <field name="bonus_date" modifiers="{}"/>
+                            <separator/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="bonus_calculation_view_tree"
+                model="ir.ui.view">
+            <field name="field_parent" eval="False"/>
+            <field name="model">bonus_calculation</field>
+            <field name="name">Bonus Calculation View Tree</field>
+            <field name="type">tree</field>
+            <field name="active" eval="True"/>
+            <field name="arch" type="xml">
+                <tree string="Bonus for Timesheet app">
+                    <field name="name" modifiers="{}"/>
+                    <field name="bonus_amount" string="Amount"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="employee_evaluation_view_form"
+                model="ir.ui.view">
+            <field name="field_parent" eval="False"/>
+            <field name="model">employee_evaluation</field>
+            <field name="name">Employee Evaluation View Form</field>
+            <field name="type">form</field>
+            <field name="active" eval="True"/>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet string="Employee Evaluation">
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" required="1"/>
+                            </h1>
+                        </div>
+                        <group col="4">
+                            <field name="bonus" modifiers="{}"/>
+                            <field name="bonus_amount" invisible="1" modifiers="{}"/>
+                            <field name="bonus_date" modifiers="{}"/>
+                            <field name="total_kpi"/>
+                            <field name="total_experience"/>
+                            <field name="evaluation_lines" string="Employee Evaluation Lines">
+                                <tree string="Employee Evaluation Line" editable="bottom">
+                                    <field name="name" modifiers="{}" attrs="{}" invisible="1"/>
+                                    <field name="evaluation_id"
+                                           context="{'search_evaluation_id': evaluation_id}"
+                                           attrs="{}" invisible="1"/>
+                                    <field name="employee_id" attrs="{}" required="1"
+                                           context="{'search_employee_id': employee_id}"/>
+                                    <field name="experience" string="Experience(years)" attrs="{}" readonly="1"
+                                           sum="Total Experience of these employees"/>
+                                    <field name="organization_skill"/>
+                                    <field name="operational_excellence"/>
+                                    <field name="kpi_score" string="KPI score" sum="Total KPI score"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="employee_evaluation_view_tree"
+                model="ir.ui.view">
+            <field name="field_parent" eval="False"/>
+            <field name="model">employee_evaluation</field>
+            <field name="name">Employee Evaluation View Tree</field>
+            <field name="type">tree</field>
+            <field name="active" eval="True"/>
+            <field name="arch" type="xml">
+                <tree string="Employee Evaluations">
+                    <field name="name" modifiers="{}"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="hr_payslip_bonus_view_form_inherit"
+                model="ir.ui.view">
+            <field name="field_parent" eval="False"/>
+            <field name="model">hr.payslip</field>
+            <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+            <field name="name">Bonus Evaluation on Payslip</field>
+            <field name="type">form</field>
+            <field name="active" eval="True"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form[1]/sheet[1]/notebook[1]" position="inside">
+                    <page name="Bonus Calculation" string="Bonus Calculation">
+                        <field name="evaluation_id"/>
+                        <field name="total_experience"/>
+                        <field name="total_kpi"/>
+                        <field name="evaluation_lines"/>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <!------------------------------------------------------------------------------------------------------------------->
+
+        <record model="ir.actions.act_window" id="bonus_calculation_action">
+            <field name="name">Bonuses</field>
+            <field name="res_model">bonus.calculation</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="employee_evaluation_action">
+            <field name="name">Evaluations</field>
+            <field name="res_model">employee_evaluation</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <!-- top level menu: no parent -->
+        <menuitem id="main_bonus_menu" name="Bonus Calculations"/>
+        <menuitem id="bonuses_menu" name="Bonuses" parent="main_bonus_menu"
+                  action="bonus_calculation_action"/>
+        <menuitem id="employee_evaluation_menu" name="Employee Evaluation" parent="main_bonus_menu"
+                  action="employee_evaluation_action"/>
+
+    </data>
+
+</odoo>

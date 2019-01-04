@@ -25,19 +25,47 @@ class Experience(models.Model):
 
 
 class PayrollBonus(models.Model):
-    _name = 'payroll_timesheet.bonus'
-    _description = 'Bonus for Timesheet app'
+    _name = 'bonus_calculation'
+    _description = 'Bonus Calculation'
     name = fields.Char(string="Bonus")
     bonus_amount = fields.Float(string="Bonus Amount")
     bonus_date = fields.Date(string="Bonus Date")
 
 
-class BonusLine(models.Model):
-    _inherit = 'hr.payslip'
+class Evaluation(models.Model):
+    _name = 'employee_evaluation'
+    _description = 'Employees evaluation for bonus calculation'
 
-    bonus = fields.Many2one('payroll_timesheet.bonus', string="Bonus")
-    bonus_amount = fields.Float(related="bonus.bonus_amount", string="Bonus Amount")
+    bonus = fields.Many2one('bonus_calculation', string="Bonus", readonly=True)
+    bonus_amount = fields.Float(related="bonus.bonus_amount", string="Bonus Amount", readonly=True)
+    evaluation_lines = fields.One2many('employee_evaluation.line', 'evaluation_id', string="Employees Evaluation")
+    total_kpi = fields.Float(string="Total KPI", compute="_get_total_kpi")
 
+    @api.depends('evaluation_lines')
+    def _get_total_kpi(self):
+        for obj in self:
+            sum = 0.0
+            for unit in self.evaluation_lines:
+                sum += unit.kpi_score
+                obj.update({'total_kpi': sum})
+
+    total_experience = fields.Float(string="Total KPI", compute="_get_total_experience")
+
+    @api.depends('evaluation_lines')
+    def _get_total_experience(self):
+        for obj in self:
+            sum = 0.0
+            for unit in self.evaluation_lines:
+                sum += unit.experience
+                obj.update({'total_experience': sum})
+
+
+class EvaluationLine(models.Model):
+    _name = 'employee_evaluation.line'
+    _description = 'Evaluation Lines'
+
+    evaluation_id = fields.Many2one('employee_evaluation')
+    employee_id = fields.Many2one('hr_employee', domain="[('is_bonus_eligible', '=', True)]")
     organization_skill = fields.Selection([["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"]])
     operational_excellence = fields.Selection([["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"]])
     kpi_score = fields.Float(string="KPI Score", readonly=True, stored=True, compute='_get_avarage')
@@ -48,3 +76,16 @@ class BonusLine(models.Model):
         for record in self:
             if record.organization_skill and record.operational_excellence:
                 record['kpi_score'] = (int(record['organization_skill']) + int(record['operational_excellence'])) / 2
+
+
+class HRPayslipEval(models.Model):
+    _inherit = 'hr.payslip'
+
+    evaluation_id = fields.Many2one('employee_evaluation', string="Evaluation")
+    evaluation_lines = fields.One2many(string="Employee Evaluations", related='evaluation_id.evaluation_lines')
+    bonus_amount = fields.Float(string="Bonus Amount", related='evaluation_id.bonus_amount')
+    total_kpi = fields.Float(string="Total KPI score", related='evaluation_id.total_kpi')
+    total_experience = fields.Integer(related='evaluation_id.total_experience', string="Total Experience")
+
+
+

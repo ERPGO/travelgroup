@@ -1,2 +1,4 @@
 id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
-payroll_bonus,payroll manager,model_payroll_timesheet_bonus,,1,1,1,1
+bonus_calculation,Bonus Calculation,model_bonus_calculation,,1,1,1,1
+employee_evaluation,employee evaluation,model_employee_evaluation,,1,1,1,1
+employee_calculation_line,employee evaluation lines ,model_employee_calculation_line,,1,1,1,1
