@@ -78,6 +78,15 @@ class EvaluationLine(models.Model):
             if record.organization_skill and record.operational_excellence:
                 record['kpi_score'] = (int(record['organization_skill']) + int(record['operational_excellence'])) / 2
 
+    @api.one
+    @api.constraints('evaluation_id', 'employee_id')
+    def _avoid_duplicate(self):
+        for record in self:
+            lines = env['employee_evaluation.line'].search_count(
+                [('employee_id', '=', record.employee_id.id), ('evaluation_id', '=', record.evaluation_id.id)])
+            if lines > 1:
+                raise Warning(_('Employee already exists'))
+
 
 class HRPayslipEval(models.Model):
     _inherit = 'hr.payslip'
@@ -120,13 +129,13 @@ class HRPayslipEval(models.Model):
     bonus_eligible_employees = fields.Integer(compute="_bonus_eligible_employees")
 
     @api.multi
-    def _bonus_eligible_employees(self):
+    def _bonus_eligible_employees( self ):
         self.bonus_eligible_employees = len(self.evaluation_id.evaluation_lines.mapped('employee_id'))
 
     total_split = fields.Float(string="Total Split", compute="_get_total_split")
 
     @api.multi
-    def _get_total_split(self):
+    def _get_total_split( self ):
         if self.kpi_split > 0.0:
             self.total_split = self.experience_split + self.kpi_split
         else:
