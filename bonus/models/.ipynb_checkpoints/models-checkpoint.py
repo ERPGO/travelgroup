@@ -12,7 +12,7 @@ class Experience(models.Model):
     is_bonus_eligible = fields.Boolean(string="Eligible for Bonus")
     startdate = fields.Date(string='Start Date')
 
-    experience = fields.Integer(string="Experience(years)")
+    experience = fields.Integer(string="Experience(years)" stored=True)
 
     @api.onchange('startdate')
     def _set_experience(self):
@@ -66,7 +66,7 @@ class EvaluationLine(models.Model):
     _description = 'Evaluation Lines'
 
     evaluation_id = fields.Many2one('employee_evaluation')
-    employee_id = fields.Many2one('hr_employee', domain="[('is_bonus_eligible', '=', True)]")
+    employee_id = fields.Many2one('hr.employee', domain="[('is_bonus_eligible', '=', True)]")
     organization_skill = fields.Selection([["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"]])
     operational_excellence = fields.Selection([["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"]])
     kpi_score = fields.Float(string="KPI Score", readonly=True, stored=True, compute='_get_avarage')
