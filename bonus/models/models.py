@@ -92,5 +92,5 @@ class HRPayslipEval(models.Model):
     @api.multi
     @api.depends('evaluation_id')
     def _get_employees_evaluations( self ):
-        lines = self.env["employee_evaluation.line"].search([])
+        lines = self.env["employee_evaluation.line"].search([('employee_id', '=', self.employee_id.id)])
         self.evaluation_lines = lines
