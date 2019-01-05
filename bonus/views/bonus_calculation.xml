@@ -157,7 +157,7 @@
                                 <field name="kpi_split"/>
                                 <field name="experience_split"/>
                                 <field name="total_split"/>
-                                <field name="bonus_eligible_employees"/>
+                                <field name="bonus_eligible_employees" invisible="1"/>
                             </group>
                         </group>
                         <group>
