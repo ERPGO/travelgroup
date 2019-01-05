@@ -83,7 +83,7 @@ class HRPayslipEval(models.Model):
     _inherit = 'hr.payslip'
 
     evaluation_id = fields.Many2one('employee_evaluation', string="Evaluation")
-    evaluation_lines = fields.One2many(related='evaluation_id.evaluation_lines', string="Employee Evaluations",
+    evaluation_lines = fields.One2many(string="Employee Evaluations",
                                        compute="_get_employees_evaluations")
     bonus_amount = fields.Float(string="Bonus Amount", related='evaluation_id.bonus_amount')
     total_kpi = fields.Float(string="Total KPI score", related='evaluation_id.total_kpi')
