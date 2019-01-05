@@ -127,4 +127,7 @@ class HRPayslipEval(models.Model):
 
     @api.multi
     def _get_total_split(self):
-        self.total_split = self.experience_split + self.kpi_split
+        if self.kpi_split > 0.0:
+            self.total_split = self.experience_split + self.kpi_split
+        else:
+            return 0.0
