@@ -83,16 +83,14 @@ class HRPayslipEval(models.Model):
     _inherit = 'hr.payslip'
 
     evaluation_id = fields.Many2one('employee_evaluation', string="Evaluation")
-    evaluation_lines = fields.One2many('employee_evaluation.line', string="Employee Evaluations", compute="_get_employees_evaluations")
+    evaluation_lines = fields.One2many(related='evaluation_id.evaluation_lines', string="Employee Evaluations",
+                                       compute="_get_employees_evaluations")
     bonus_amount = fields.Float(string="Bonus Amount", related='evaluation_id.bonus_amount')
     total_kpi = fields.Float(string="Total KPI score", related='evaluation_id.total_kpi')
     total_experience = fields.Integer(related='evaluation_id.total_experience', string="Total Experience")
 
     @api.multi
-    @api.onchange('evaluation_id')
+    @api.depends('evaluation_id')
     def _get_employees_evaluations( self ):
-        if self.evaluation_id:
-            lines = self.env["employee_evaluation.line"].search([])
-            self.evaluation_lines = lines
-        else:
-            return None
+        lines = self.env["employee_evaluation.line"].search([])
+        self.evaluation_lines = lines
