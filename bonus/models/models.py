@@ -80,7 +80,7 @@ class EvaluationLine(models.Model):
 
     @api.one
     @api.constraints('evaluation_id', 'employee_id')
-    def _avoid_duplicate(self):
+    def _avoid_duplicate( self ):
         for record in self:
             lines = env['employee_evaluation.line'].search_count(
                 [('employee_id', '=', record.employee_id.id), ('evaluation_id', '=', record.evaluation_id.id)])
