@@ -97,7 +97,7 @@ class HRPayslipEval(models.Model):
 
     employee_kpi_score = fields.Float(string="Employee's KPI score", compute="_get_employees_kpi")
 
-    @api.depends('evaluation_lines'):
+    @api.depends('evaluation_lines')
     def _get_employees_kpi(self):
         for obj in self:
             sum = 0.0
