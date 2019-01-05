@@ -20,7 +20,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'hr', 'hr_payroll', 'payroll_timesheet'],
+    'depends': ['base', 'hr', 'hr_payroll'],
     # always loaded
     'data': [
         'security/ir.model.access.csv',
