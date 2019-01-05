@@ -89,8 +89,7 @@ class HRPayslipEval(models.Model):
     total_kpi = fields.Float(string="Total KPI score", related='evaluation_id.total_kpi')
     total_experience = fields.Integer(related='evaluation_id.total_experience', string="Total Experience")
 
-    @api.multi
-    @api.depends('evaluation_id')
+    @api.one
     def _get_employees_evaluations(self):
         lines = self.env["employee_evaluation.line"].search([('employee_id', '=', self.employee_id.name)])
         self.evaluation_lines = lines
