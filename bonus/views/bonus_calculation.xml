@@ -147,11 +147,19 @@
             <field name="arch" type="xml">
                 <xpath expr="//form[1]/sheet[1]/notebook[1]" position="inside">
                     <page name="Bonus Calculation" string="Bonus Calculation">
-                        <group name="Bonus on Payslio" >
-                        <field name="evaluation_id"/>
-                        <field name="total_experience"/>
-                        <field name="total_kpi"/>
-                        <field name="evaluation_lines"/>
+                        <group>
+                            <group name="Bonus on Payslip">
+                                <field name="evaluation_id"/>
+                                <field name="total_experience"/>
+                                <field name="total_kpi"/>
+                            </group>
+                            <group>
+                                <field name="kpi_split"/>
+                                <field name="experience_split"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="evaluation_lines"/>
                         </group>
                     </page>
                 </xpath>
