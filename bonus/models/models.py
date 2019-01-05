@@ -89,7 +89,7 @@ class HRPayslipEval(models.Model):
     total_experience = fields.Integer(related='evaluation_id.total_experience', string="Total Experience")
 
     @api.multi
-    @api.depends('evaluation_id')
+    @api.onchange('evaluation_id')
     def _get_employees_evaluations( self ):
         lines = self.env["employee_evaluation.line"].search([])
         self.evaluation_lines = lines
