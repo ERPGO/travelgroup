@@ -79,7 +79,7 @@ class EvaluationLine(models.Model):
                 record['kpi_score'] = (int(record['organization_skill']) + int(record['operational_excellence'])) / 2
 
     @api.one
-    @api.constraints('evaluation_id', 'employee_id')
+    @api.constrains('evaluation_id', 'employee_id')
     def _avoid_duplicate( self ):
         for record in self:
             lines = env['employee_evaluation.line'].search_count(
