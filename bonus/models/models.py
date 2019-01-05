@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 
 # noinspection PyUnresolvedReferences,PyUnresolvedReferences,PyUnresolvedReferences,PyUnresolvedReferences
-from odoo import models, fields, api, _
+from odoo import models, fields, api, exceptions
 from dateutil.relativedelta import relativedelta
 from datetime import date, datetime
-
 
 class Experience(models.Model):
     _inherit = 'hr.employee'
