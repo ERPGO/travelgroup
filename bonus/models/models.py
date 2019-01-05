@@ -12,7 +12,7 @@ class Experience(models.Model):
     is_bonus_eligible = fields.Boolean(string="Eligible for Bonus")
     startdate = fields.Date(string='Start Date')
 
-    experience = fields.Integer(string="Experience(years)" stored=True)
+    experience = fields.Integer(string="Experience(years)", stored=True)
 
     @api.onchange('startdate')
     def _set_experience(self):
