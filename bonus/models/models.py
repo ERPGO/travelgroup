@@ -90,23 +90,29 @@ class HRPayslipEval(models.Model):
     total_experience = fields.Integer(related='evaluation_id.total_experience', string="Total Experience")
 
     @api.one
-    def _get_employees_evaluations(self):
-        lines = self.env["employee_evaluation.line"].search([('employee_id', '=', self.employee_id.name), ('evaluation_id', '=', self.evaluation_id.name)])
+    def _get_employees_evaluations( self ):
+        lines = self.env["employee_evaluation.line"].search(
+            [('employee_id', '=', self.employee_id.name), ('evaluation_id', '=', self.evaluation_id.name)])
         self.evaluation_lines = lines
-
 
     employee_kpi_score = fields.Float(string="Employee's KPI score", compute="_get_employees_kpi")
 
     @api.depends('evaluation_lines')
-    def _get_employees_kpi(self):
+    def _get_employees_kpi( self ):
         for obj in self:
             sum = 0.0
             for unit in self.evaluation_lines:
                 sum += unit.kpi_score
                 obj.update({'employee_kpi_score': sum})
 
-    kpi_multiplier = fields.Float(string="KPI multiplier", compute="_get_kpi_multiplier")
+    kpi_split = fields.Float(string="KPI split", compute="_get_kpi_split")
 
     @api.multi
-    def _get_kpi_multiplier(self):
-        self.kpi_multiplier = self.employee_kpi_score / self.total_kpi
+    def _get_kpi_split(self):
+        self.kpi_split = self.employee_kpi_score / self.total_kpi
+
+    experience_split = fields.Float(string="Experience Split", compute="_get_experience_split")
+
+    @api.multi
+    def _get_experience_split( self ):
+        self.experience_split = self.employee_id.experience / self.total_experience
