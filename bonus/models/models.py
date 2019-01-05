@@ -108,7 +108,7 @@ class HRPayslipEval(models.Model):
     kpi_split = fields.Float(string="KPI split", compute="_get_kpi_split")
 
     @api.multi
-    def _get_kpi_split(self):
+    def _get_kpi_split( self ):
         self.kpi_split = self.employee_kpi_score / self.total_kpi
 
     experience_split = fields.Float(string="Experience Split", compute="_get_experience_split")
@@ -116,3 +116,9 @@ class HRPayslipEval(models.Model):
     @api.multi
     def _get_experience_split( self ):
         self.experience_split = self.employee_id.experience / self.total_experience
+
+    bonus_eligible_employees = fields.Integer(compute="_bonus_eligible_employees")
+
+    @api.multi
+    def _bonus_eligible_employees(self):
+        self.bonus_eligible_employees = len(self.evaluation_id.evaluation_lines.mapped('employee_id'))
