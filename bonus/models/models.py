@@ -122,3 +122,9 @@ class HRPayslipEval(models.Model):
     @api.multi
     def _bonus_eligible_employees(self):
         self.bonus_eligible_employees = len(self.evaluation_id.evaluation_lines.mapped('employee_id'))
+
+    total_split = fields.Float(string="Total Split", compute="_get_total_split")
+
+    @api.multi
+    def _get_total_split(self):
+        self.total_split = self.experience_split + self.kpi_split
