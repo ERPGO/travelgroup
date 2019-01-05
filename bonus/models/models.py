@@ -93,3 +93,20 @@ class HRPayslipEval(models.Model):
     def _get_employees_evaluations(self):
         lines = self.env["employee_evaluation.line"].search([('employee_id', '=', self.employee_id.name), ('evaluation_id', '=', self.evaluation_id.name)])
         self.evaluation_lines = lines
+
+
+    employee_kpi_score = fields.Float(string="Employee's KPI score", compute="_get_employees_kpi")
+
+    @api.depends('evaluation_lines'):
+    def _get_employees_kpi(self):
+        for obj in self:
+            sum = 0.0
+            for unit in self.evaluation_lines:
+                sum += unit.kpi_score
+                obj.update({'employee_kpi_score': sum})
+
+    kpi_multiplier = fields.Float(string="KPI multiplier", compute="_get_kpi_multiplier")
+
+    @api.multi
+    def _get_kpi_multiplier(self):
+        self.kpi_multiplier = self.employee_kpi_score / self.total_kpi
