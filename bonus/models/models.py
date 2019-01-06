@@ -149,7 +149,7 @@ class HRPayslipEval(models.Model):
     @api.depends('timesheet_ids')
     def _get_ot_hours( self ):
         for obj in self:
-            ot_timesheets = self.timesheet_ids.search([('task_id.tag_ids', 'contains', 'overtime')])
+            ot_timesheets = self.timesheet_ids.search([('task_id', 'is', 'overtime')])
             sum = 0.0
             for unit in ot_timesheets:
                 sum += unit.unit_amount
