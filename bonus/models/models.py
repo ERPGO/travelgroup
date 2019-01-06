@@ -146,6 +146,7 @@ class HRPayslipEval(models.Model):
 
     ot_hours = fields.Float(string="OT hours", compute="_get_ot_hours")
 
+    @api.multi
     def _get_ot_hours( self ):
         for obj in self:
             domain = [('employee_id', '=', self.employee_id.name), ('date', '>=', self.date_from), ('date', '<=', self.date_to),
