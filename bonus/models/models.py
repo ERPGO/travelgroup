@@ -40,7 +40,7 @@ class Evaluation(models.Model):
     bonus = fields.Many2one('bonus_calculation', string="Bonus")
     bonus_amount = fields.Float(related="bonus.bonus_amount", string="Bonus Amount", readonly=True)
     evaluation_lines = fields.One2many('employee_evaluation.line', 'evaluation_id', string="Employees Evaluation",
-                                       default="get_bonus_employee_list")
+                                       compute="get_bonus_employee_list")
 
     def get_bonus_employee_list(self):
         lines = self.env['employee_evaluation.line'].search([])
