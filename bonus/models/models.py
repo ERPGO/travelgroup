@@ -40,7 +40,14 @@ class Evaluation(models.Model):
     bonus = fields.Many2one('bonus_calculation', string="Bonus")
     bonus_amount = fields.Float(related="bonus.bonus_amount", string="Bonus Amount", readonly=True)
     evaluation_lines = fields.One2many('employee_evaluation.line', 'evaluation_id', string="Employees Evaluation",
-                                       default="self.env['employee_evaluation.line'].browse([])")
+                                       default="get_bonus_employee_list")
+
+    def get_bonus_employee_list(self):
+        bonus_eligible_employees = self.env['hr.employee'].search([('is_bonus_eligible', '=', True)])
+        for obj in bonus_eligible_employees:
+            self.evaluation_lines.update({'employee_id': obj.employee_id})
+
+
     total_kpi = fields.Float(string="Total KPI", compute="_get_total_kpi")
 
     @api.depends('evaluation_lines')
