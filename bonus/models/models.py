@@ -143,3 +143,14 @@ class HRPayslipEval(models.Model):
             self.total_split = self.experience_split + self.kpi_split
         else:
             return 0.0
+
+    ot_hours = fields.Float(string="OT hours", compute="_get_ot_hours")
+
+    @api.depends('timesheet_ids')
+    def _get_ot_hours( self ):
+        for obj in self:
+            ot_timesheets = self.timesheet_ids.search([('task_id.tag_ids', 'contains', 'overtime')])
+            sum = 0.0
+            for unit in ot_timesheets:
+                sum += unit.unit_amount
+            obj.update({'ot_hours': sum})
