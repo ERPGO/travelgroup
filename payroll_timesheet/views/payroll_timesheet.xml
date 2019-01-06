@@ -16,6 +16,7 @@
                                 <field name="employee_id" required="1"/>
                                 <field name="name"/>
                                 <field name="project_id"/>
+                                <field name="task_id"/>
                                 <field name="unit_amount" sum="Total" widget="timesheet_uom"/>
                             </tree>
                         </field>
@@ -39,6 +40,8 @@
                                 <field name="api_project_hours" string="API project hours"/>
                                 <field name="vizam_project_hours" string="Vizam project hours"/>
                                 <field name="backpack_project_hours" string="BackPack project hours"/>
+                                <field name="ot_hours" string="Overtime hours"/>
+                                <field name="total_ot_hours" string="Total overtime hours"/>
                             </group>
                             <group name="overhead percentage" string="Project Splits">
                                 <field name="api_percentage" string="API Split"/>
