@@ -135,6 +135,13 @@ class HRPayslipEval(models.Model):
         if self.total_experience > 0:
             self.experience_split = self.employee_id.experience / self.total_experience
 
+    ot_split = fields.Float(string="Overtime split", compute="_get_ot_split")
+
+    @api.multi
+    def _get_ot_split( self ):
+        if self.total_ot_hours > 0.0:
+            self.ot_split = self.ot_hours / self.total_ot_hours
+
     bonus_eligible_employees = fields.Integer(compute="_bonus_eligible_employees")
 
     @api.multi
@@ -149,3 +156,5 @@ class HRPayslipEval(models.Model):
             self.total_split = self.experience_split + self.kpi_split
         else:
             return 0.0
+
+
