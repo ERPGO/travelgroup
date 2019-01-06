@@ -43,10 +43,6 @@ class Evaluation(models.Model):
                                        compute="get_bonus_employee_list")
 
     def get_bonus_employee_list(self):
-        lines = self.env['employee_evaluation.line'].search([])
-        self.evaluation_lines = lines
-
-    def get_bonus_employee_list234(self):
         bonus_eligible_employees = self.env['hr.employee'].search([('is_bonus_eligible', '=', True)])
         for obj in bonus_eligible_employees:
             self.evaluation_lines.update({'employee_id': obj.employee_id})
