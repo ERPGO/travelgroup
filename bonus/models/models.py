@@ -45,7 +45,7 @@ class Evaluation(models.Model):
     def get_bonus_employee_list(self):
         bonus_eligible_employees = self.env['hr.employee'].search([('is_bonus_eligible', '=', True)])
         for obj in bonus_eligible_employees:
-            self.evaluation_lines.update({'employee_id': obj.employee_id})
+            self.evaluation_lines.update({'employee_id': obj.id})
 
 
     total_kpi = fields.Float(string="Total KPI", compute="_get_total_kpi")
