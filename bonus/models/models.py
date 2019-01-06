@@ -24,10 +24,10 @@ class Experience(models.Model):
             self.experience = relativedelta(d2, d1).years
 
 
-class AccountAnalyticInherit(models.Model):
-    _inherit = 'account.analytic.line'
+#class AccountAnalyticInherit(models.Model):
+#    _inherit = 'account.analytic.line'
 
-    is_bonus_eligible = fields.Boolean(string="Bonus Eligible", related="employee_id.is_eligible_bonus")
+#    is_bonus_eligible = fields.Boolean(string="Bonus Eligible", related="employee_id.is_eligible_bonus")
 
 
 class PayrollBonus(models.Model):
