@@ -1,11 +1,6 @@
 from odoo import models, api, fields, _
 
 
-#class AccountAnalytic(models.Model):
-#    _inherit = 'account.analytic.line'
-
-#    is_bonus_eligible = fields.Boolean(string="Bonus Eligible", related='hr.employee.is_eligible_bonus')
-
 class hr_payslip(models.Model):
     _inherit = 'hr.payslip'
 

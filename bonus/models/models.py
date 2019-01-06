@@ -24,6 +24,12 @@ class Experience(models.Model):
             self.experience = relativedelta(d2, d1).years
 
 
+class AccountAnalytic(models.Model):
+    _inherit = 'account.analytic.line'
+
+    is_bonus_eligible = fields.Boolean(string="Bonus Eligible", related='employee_id.is_eligible_bonus')
+
+
 class PayrollBonus(models.Model):
     _name = 'bonus_calculation'
     _description = 'Bonus Calculation'
@@ -143,4 +149,3 @@ class HRPayslipEval(models.Model):
             self.total_split = self.experience_split + self.kpi_split
         else:
             return 0.0
-
