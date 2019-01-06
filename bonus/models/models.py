@@ -81,7 +81,7 @@ class EvaluationLine(models.Model):
     @api.constrains('evaluation_id', 'employee_id')
     def _avoid_duplicate( self ):
         for record in self:
-            lines = env['employee_evaluation.line'].search_count(
+            lines = self.env['employee_evaluation.line'].search_count(
                 [('employee_id', '=', record.employee_id.id), ('evaluation_id', '=', record.evaluation_id.id)])
             if lines > 1:
                 raise Warning(_('Employee already exists'))
