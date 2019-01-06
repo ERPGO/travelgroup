@@ -151,7 +151,7 @@ class HRPayslipEval(models.Model):
         for obj in self:
             domain = [('employee_id', '=', self.employee_id.name), ('date', '>=', self.date_from), ('date', '<=', self.date_to),
                       ('validated', '=', True), ('task_id', '=', 'Overtime')]
-            ot_timesheets_ids = self.env["account.analytic.line"].search.search(domain)
+            ot_timesheets_ids = self.env["account.analytic.line"].search(domain)
             sum = 0.0
             for unit in ot_timesheets_ids:
                 sum += unit.unit_amount
