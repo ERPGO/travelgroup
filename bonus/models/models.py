@@ -79,12 +79,12 @@ class EvaluationLine(models.Model):
 
     @api.one
     @api.constrains('evaluation_id', 'employee_id')
-    def _avoid_duplicate( self ):
+    def _avoid_duplicate(self):
         for record in self:
             lines = self.env['employee_evaluation.line'].search_count(
                 [('employee_id', '=', record.employee_id.id), ('evaluation_id', '=', record.evaluation_id.id)])
             if lines > 1:
-                raise Warning(_('Employee already exists'))
+                raise Warning('Employee already exists')
 
 
 class HRPayslipEval(models.Model):
