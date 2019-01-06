@@ -5,6 +5,7 @@ from odoo import models, fields, api, exceptions
 from dateutil.relativedelta import relativedelta
 from datetime import date, datetime
 
+
 class Experience(models.Model):
     _inherit = 'hr.employee'
 
@@ -38,7 +39,8 @@ class Evaluation(models.Model):
     name = fields.Char(string="Employee Evaluation", required=True)
     bonus = fields.Many2one('bonus_calculation', string="Bonus")
     bonus_amount = fields.Float(related="bonus.bonus_amount", string="Bonus Amount", readonly=True)
-    evaluation_lines = fields.One2many('employee_evaluation.line', 'evaluation_id', string="Employees Evaluation")
+    evaluation_lines = fields.One2many('employee_evaluation.line', 'evaluation_id', string="Employees Evaluation",
+                                       default=self.env['employee_evaluation.line'].browse([]))
     total_kpi = fields.Float(string="Total KPI", compute="_get_total_kpi")
 
     @api.depends('evaluation_lines')
@@ -79,7 +81,7 @@ class EvaluationLine(models.Model):
 
     @api.one
     @api.constrains('evaluation_id', 'employee_id')
-    def _avoid_duplicate(self):
+    def _avoid_duplicate( self ):
         for record in self:
             lines = self.env['employee_evaluation.line'].search_count(
                 [('employee_id', '=', record.employee_id.id), ('evaluation_id', '=', record.evaluation_id.id)])
