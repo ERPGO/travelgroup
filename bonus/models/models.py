@@ -8,7 +8,7 @@ from datetime import date, datetime
 class Experience(models.Model):
     _inherit = 'hr.employee'
 
-    is_bonus_eligible = fields.Boolean(string="Eligible for Bonus")
+    is_bonus_eligible = fields.Boolean(string="Eligible for Bonus", default=True)
     startdate = fields.Date(string='Start Date')
 
     experience = fields.Integer(string="Experience(years)", stored=True)
