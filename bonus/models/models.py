@@ -142,12 +142,6 @@ class HRPayslipEval(models.Model):
         if self.total_ot_hours > 0.0:
             self.ot_split = self.ot_hours / self.total_ot_hours
 
-    bonus_eligible_employees = fields.Integer(compute="_bonus_eligible_employees")
-
-    @api.multi
-    def _bonus_eligible_employees( self ):
-        self.bonus_eligible_employees = len(self.evaluation_id.evaluation_lines.mapped('employee_id'))
-
     total_split = fields.Float(string="Total Split", compute="_get_total_split")
 
     @api.multi

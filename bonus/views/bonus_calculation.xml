@@ -149,16 +149,16 @@
                     <page name="Bonus Calculation" string="Bonus Calculation">
                         <group>
                             <group name="Bonus on Payslip">
-                                <field name="evaluation_id"/>
-                                <field name="total_experience"/>
-                                <field name="total_kpi"/>
+                                <field name="evaluation_id" required="1"/>
+                                <field name="total_experience" invisible="1"/>
+                                <field name="total_ot_hours" invisible="1"/>
+                                <field name="total_kpi" invisible="1"/>
                             </group>
                             <group>
                                 <field name="kpi_split"/>
                                 <field name="experience_split"/>
                                 <field name="ot_split"/>
                                 <field name="total_split"/>
-                                <field name="bonus_eligible_employees" invisible="1"/>
                             </group>
                         </group>
                         <group>
