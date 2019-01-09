@@ -24,7 +24,7 @@
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
-        'views/payroll_timesheet.xml',
+        #'views/payroll_timesheet.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
