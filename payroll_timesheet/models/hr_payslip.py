@@ -50,10 +50,11 @@ class hr_payslip(models.Model):
         for project in projects:
             domain = [('employee_id', '=', self.employee_id.name), ('date', '>=', self.date_from),
                       ('date', '<=', self.date_to),
-                      ('validated', '=', True), ('project_id', '=', project.name)]
+                      ('validated', '=', True), ('is_bonus_eligible', '=', True), ('project_id', '=', project.name)]
             domain_ot = [('employee_id', '=', self.employee_id.name), ('date', '>=', self.date_from),
                          ('date', '<=', self.date_to),
-                         ('validated', '=', True), ('project_id', '=', project.name), ('task_id', '=', 'Overtime')]
+                         ('validated', '=', True), ('is_bonus_eligible', '=', True), ('project_id', '=', project.name),
+                         ('task_id', '=', 'Overtime')]
             all_timesheets = self.env["account.analytic.line"].search(domain)
             ot_timesheets = self.env["account.analytic.line"].search(domain_ot)
             sum_all = 0.0
