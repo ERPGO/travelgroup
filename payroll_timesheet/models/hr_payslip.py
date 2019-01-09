@@ -1,6 +1,16 @@
 from odoo import models, api, fields, _
 
 
+class hr_payslip_projects(models.Model):
+    _name = 'hr.payslip.projects'
+    _description = 'to see total hours per project on hr.payslip module'
+    
+    name = fields.Char(string="Description")
+    project_id = fields.Many2one('project.project')
+    project_hours = fields.Float(string="Total hours")
+    overtime_hours = fields.Float(string="Overtime hours")
+    slip_id = fields.Many2one('hr.payslip')
+    
 class hr_payslip(models.Model):
     _inherit = 'hr.payslip'
 
@@ -29,6 +39,33 @@ class hr_payslip(models.Model):
     def _def_num_projects( self ):
         self.total_num_projects = len(self.timesheet_ids.mapped('project_id'))
 
+
+        
+    all_project_hours = fields.One2many('hr.payslip.projects', 'slip_id', "Project Hours")
+    
+    @api.onchange('employee_id')
+    def _calculate_project_hours(self):
+        all_project_hours = []
+        value = {}
+        projects = self.env['project.project'].search([])
+        for project in projects:
+            domain = [('employee_id', '=', self.employee_id.name), ('date', '>=', self.date_from), ('date', '<=', self.date_to),
+            ('validated', '=', True), ('project_id', '=', project.name)]
+            domain_ot = [('employee_id', '=', self.employee_id.name), ('date', '>=', self.date_from), ('date', '<=', self.date_to),
+            ('validated', '=', True), ('project_id', '=', project.name), ('task_id', '=', 'Overtime')]
+            all_timesheets = self.env["account.analytic.line"].search(domain)
+            ot_timesheets = self.env["account.analytic.line"].search(domain_ot)
+            sum_all = 0.0
+            sum_ot = 0.0
+            for unit in all_timesheets:
+                sum_all += unit.unit_amount
+            for ot in ot_timesheets:
+                sum_ot += ot.unit_amount
+            all_project_hours.append((0, 0, {'project_id': project.id, 'project_hours': sum_all, 'overtime_hours': sum_ot}))
+        value.update(all_project_hours=all_project_hours)
+        return {'value': value}
+    
+    
     api_project_hours = fields.Float(string="API project hours", compute="_api_timesheet_sum")
 
     @api.depends('timesheet_ids')
