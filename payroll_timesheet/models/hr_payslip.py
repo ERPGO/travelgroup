@@ -68,6 +68,17 @@ class hr_payslip(models.Model):
         value.update(all_project_hours=all_project_hours)
         return {'value': value}
 
+    @api.multi
+    def _get_project_split(self, project):
+        for line in self.all_project_hours:
+            if line.project_id.name == project:
+                project_split = line.project_split
+        return project_split
+
+    @api.multi
+    def _get_sample_split(self):
+        return 27.272727
+
     api_project_hours = fields.Float(string="API project hours", compute="_api_timesheet_sum")
 
     @api.depends('timesheet_ids')

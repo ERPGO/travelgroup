@@ -53,5 +53,28 @@
                 </xpath>
             </field>
         </record>
+
+
+        <record id="hr_payslip_project_hours_form"
+                model="ir.ui.view">
+            <field name="name">HR Payslip Project Hours inherit</field>
+            <field name="model">hr.payslip</field>
+            <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form[1]/sheet[1]/notebook[1]" position="inside">
+                    <page string="Project hours">
+                        <group>
+                            <field name="all_project_hours">
+                                <tree>
+                                    <field name="project_id"/>
+                                    <field name="overtime_hours" sum="ot hours"/>
+                                    <field name="project_hours" sum="all project hours"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
     </data>
 </odoo>

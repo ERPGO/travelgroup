@@ -15,3 +15,5 @@ def _calculate_project_hours(self):
     value.update(project_hours=project_hours)
     return {'value': value}
 
+@api.multi
+def _get_project_split(project):
