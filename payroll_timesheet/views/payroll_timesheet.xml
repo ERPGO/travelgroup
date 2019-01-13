@@ -67,6 +67,7 @@
                             <field name="all_project_hours">
                                 <tree>
                                     <field name="project_id"/>
+                                    <field name="project_split"/>
                                     <field name="overtime_hours" sum="ot hours"/>
                                     <field name="project_hours" sum="all project hours"/>
                                 </tree>

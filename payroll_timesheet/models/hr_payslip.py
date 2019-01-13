@@ -79,7 +79,7 @@ class hr_payslip(models.Model):
     
     @api.multi
     def _get_sample_split(self):
-        return 27.272727
+        return 1200
 
     api_project_hours = fields.Float(string="API project hours", compute="_api_timesheet_sum")
 
