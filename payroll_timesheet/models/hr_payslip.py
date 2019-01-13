@@ -10,6 +10,7 @@ class hr_payslip_projects(models.Model):
     project_hours = fields.Float(string="Total hours")
     overtime_hours = fields.Float(string="Overtime hours")
     slip_id = fields.Many2one('hr.payslip')
+    project_split = fields.Float(string='Project split')
 
 
 class hr_payslip(models.Model):
