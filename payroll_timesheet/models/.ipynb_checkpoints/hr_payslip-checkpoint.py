@@ -72,8 +72,9 @@ class hr_payslip(models.Model):
         value.update(all_project_hours=all_project_hours)
         return {'value': value}
     
+
     @api.multi
-    def _get_project_split(self, project):
+    def _get_project_split(self, cr, uid, payslip, project):
         for line in self.all_project_hours:
             if line.project_id.name == project:
                 project_split = line.project_split
