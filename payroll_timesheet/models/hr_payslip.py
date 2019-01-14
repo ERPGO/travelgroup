@@ -66,17 +66,18 @@ class hr_payslip(models.Model):
                 sum_ot += ot.unit_amount
             split = sum_all / self.total_project_hours * 100
             all_project_hours.append(
-                (0, 0, {'project_id': project.id, 'project_hours': sum_all, 'overtime_hours': sum_ot, 'project_split': split}))
+                (0, 0, {'project_id': project.id, 'project_hours': sum_all, 'overtime_hours': sum_ot,
+                        'project_split': split}))
         value.update(all_project_hours=all_project_hours)
         return {'value': value}
-    
+
     @api.multi
     def _get_project_split(self, project):
         for line in self.all_project_hours:
             if line.project_id.name == project:
                 project_split = line.project_split
         return project_split
-    
+
     @api.multi
     def _get_sample_split(self):
         return 1200
