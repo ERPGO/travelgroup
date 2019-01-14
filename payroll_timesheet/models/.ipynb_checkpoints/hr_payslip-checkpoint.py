@@ -60,11 +60,13 @@ class hr_payslip(models.Model):
             ot_timesheets = self.env["account.analytic.line"].search(domain_ot)
             sum_all = 0.0
             sum_ot = 0.0
+            split = 0.0
             for unit in all_timesheets:
                 sum_all += unit.unit_amount
             for ot in ot_timesheets:
                 sum_ot += ot.unit_amount
-            split = sum_all / self.total_project_hours * 100
+            if self.total_project_hours > float(0):
+                split = sum_all / self.total_project_hours * 100
             all_project_hours.append(
                 (0, 0, {'project_id': project.id, 'project_hours': sum_all, 'overtime_hours': sum_ot, 'project_split': split}))
         value.update(all_project_hours=all_project_hours)
