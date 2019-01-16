@@ -27,7 +27,7 @@ class hr_payslip(models.Model):
 
     total_project_hours = fields.Float(string="Total project hours", compute="_total_timesheets_sum")
 
-    @api.depends('timesheet_ids')
+    @api.multi
     def _total_timesheets_sum(self):
         for obj in self:
             sum = 0.0
@@ -43,7 +43,7 @@ class hr_payslip(models.Model):
 
     all_project_hours = fields.One2many('hr.payslip.projects', 'slip_id', "Project Hours")
 
-    @api.onchange('employee_id')
+    @api.onchange('employee_id', 'employee_id.name', 'date_from', 'date_to')
     def _calculate_project_hours(self):
         all_project_hours = []
         value = {}
@@ -56,29 +56,28 @@ class hr_payslip(models.Model):
                          ('date', '<=', self.date_to),
                          ('validated', '=', True), ('is_bonus_eligible', '=', True), ('project_id', '=', project.name),
                          ('task_id', '=', 'Overtime')]
+            domain_time = [('employee_id', '=', self.employee_id.name), ('date', '>=', self.date_from), ('date', '<=', self.date_to),
+             ('validated', '=', True)]
+            timesheets = self.env["account.analytic.line"].search(domain_time)
             all_timesheets = self.env["account.analytic.line"].search(domain)
             ot_timesheets = self.env["account.analytic.line"].search(domain_ot)
             sum_all = 0.0
             sum_ot = 0.0
             split = 0.0
+            sum = 0.0
+            for time in timesheets:
+                sum += time.unit_amount
             for unit in all_timesheets:
                 sum_all += unit.unit_amount
             for ot in ot_timesheets:
                 sum_ot += ot.unit_amount
-            if self.total_project_hours > float(0):
-                split = sum_all / self.total_project_hours * 100
+            if sum > float(0):
+                split = sum_all / sum * 100
             all_project_hours.append(
                 (0, 0, {'project_id': project.id, 'project_hours': sum_all, 'overtime_hours': sum_ot, 'project_split': split}))
         value.update(all_project_hours=all_project_hours)
         return {'value': value}
     
-
-    @api.multi
-    def _get_project_split(self, cr, uid, payslip, project):
-        for line in self.all_project_hours:
-            if line.project_id.name == project:
-                project_split = line.project_split
-        return project_split
     
     @api.multi
     def _get_sample_split(self):
