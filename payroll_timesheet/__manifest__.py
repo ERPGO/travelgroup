@@ -23,7 +23,7 @@
     'depends': ['base', 'hr', 'timesheet_grid', 'hr_payroll', 'hr_payroll_account', 'account_accountant'],
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
+        'security/ir.model.access.csv',
         'views/payroll_timesheet.xml',
     ],
     # only loaded in demonstration mode
